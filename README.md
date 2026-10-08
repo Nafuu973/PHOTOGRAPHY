@@ -3,60 +3,84 @@
 Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
-La page met en avant les offres qui rapportent le plus :
+🔗 **Adresse publique :** https://nafuu973.github.io/photography/
 
-1. **Shooting privé** : portrait, couple, véhicule, animaux
-2. **Mariage & événement**
-3. **Carte cadeau** (offrir un shooting)
+La page met en avant les offres qui rapportent le plus : **mariage & événement**,
+**shooting privé** et **carte cadeau**. Chaque bouton ouvre WhatsApp avec un
+message pré-rempli. Viennent ensuite le portfolio Instagram et les albums des
+événements bénévoles (participation libre sur Lydia).
 
-Chaque bouton ouvre WhatsApp avec un message pré-rempli adapté (type de séance,
-date, lieu…), pour que le client n'ait plus qu'à compléter.
-Viennent ensuite le portfolio Instagram et les albums des événements bénévoles
-(accès à l'album complet contre une participation libre sur Lydia).
+## Organisation du dépôt
+
+```
+index.html              La page de liens
+assets/
+  css/fonts.css         Déclaration des polices
+  css/style.css         Mise en forme (sections numérotées)
+  js/main.js            Barre « Demander mon devis » qui apparaît au défilement
+  fonts/                Polices auto-hébergées + licences (SIL OFL)
+  img/                  Photo de profil, favicon, image de partage (1200×630)
+  qr/                   QR codes et carte prête à publier
+documents/
+  devis.html            Modèle de devis (calcul automatique)
+  contrat-mariage.html  Modèle de contrat de mariage
+  doc.css, doc.js, devis.js
+tools/
+  build_links.py        Génère les liens WhatsApp pré-remplis
+  partage.html          Source de l'image de partage
+  carte-qr.html         Source de la carte QR
+robots.txt              Empêche Google d'indexer documents/ et tools/
+```
 
 ## Modifier la page
 
-Tout est dans `index.html`, et on peut le modifier directement sur GitHub :
-ouvrez le fichier, cliquez sur le crayon ✏️, puis sur **Commit changes**.
+On peut tout modifier directement sur GitHub : ouvrez le fichier, cliquez sur le
+crayon ✏️, puis sur **Commit changes**.
 
-| Quoi | Où chercher dans `index.html` |
+| Quoi | Où |
 |---|---|
-| Texte d'une offre | `<!-- Offre 1 …` et `<!-- Offre 2 …` |
-| Numéro WhatsApp / téléphone | `33786887651` (dans les liens `wa.me`, `tel:` et le script en bas) |
-| Message pré-rempli d'un bouton | l'attribut `data-wa="…"` du bouton (`&#10;` = retour à la ligne) |
-| Galeries (albums Google Photos) | la liste `GALERIES` dans le script en bas de page |
-| E-mail | `nafuu.raw@gmail.com` |
-| Lien de la cagnotte | `https://pots.lydia.me/…` |
-| Photo de profil | remplacez le fichier `images/profil.jpg` (image carrée) |
+| Textes des offres | `index.html`, section `<!-- Offres -->` |
+| Messages WhatsApp pré-remplis | modifier `tools/build_links.py`, le lancer, coller les liens dans `index.html` |
+| Galeries Google Photos | `index.html`, décommenter le bloc `Galeries` |
+| Couleurs, tailles | `assets/css/style.css`, section 1 « Variables » |
+| Photo de profil | remplacer `assets/img/profil.jpg` (carrée, 480×480) |
 
-## Mettre la page en ligne (gratuit, avec GitHub Pages)
+## Sécurité
 
-1. Sur GitHub : **Settings** → **Pages**.
-2. Dans **Source**, choisissez **Deploy from a branch**.
-3. Sélectionnez la branche qui contient `index.html` et le dossier `/ (root)`, puis cliquez sur **Save**.
-4. Après une ou deux minutes, la page est disponible à l'adresse
-   `https://nafuu973.github.io/photography/`.
+- **Aucun script externe, aucun traceur, aucune police Google** : tout est servi
+  depuis le site lui-même (aucune donnée de visiteur envoyée à des tiers).
+- **Content-Security-Policy** stricte : seuls les fichiers du site peuvent être
+  chargés ; aucun code inline, aucun formulaire.
+- La page fonctionne entièrement sans JavaScript. Le seul script (`main.js`)
+  ne fait qu'afficher la barre de réservation au défilement.
+- Liens externes en `rel="noopener noreferrer"`.
+- Les photos publiées sont débarrassées de leurs métadonnées (EXIF, GPS).
+- HTTPS forcé par GitHub Pages (cocher **Enforce HTTPS** dans Settings → Pages).
 
-Collez cette adresse dans la bio Instagram, à la place du lien WhatsApp ou à côté.
+## QR code
 
-> GitHub Pages n'est gratuit que pour les dépôts **publics** (sauf avec un abonnement GitHub Pro).
-
-## Documents commerciaux (`documents/`)
-
-| Fichier | À quoi il sert |
+| Fichier | Usage |
 |---|---|
-| `devis.html` | Devis personnalisé : lignes ajoutables, totaux, TVA et acompte calculés automatiquement |
-| `contrat-mariage.html` | Contrat de mariage : acompte, annulation, droits d'auteur, droit à l'image (cases à cocher) |
+| `assets/qr/carte-qr.png` | Carte 1080×1350 prête à publier (story, post, impression) |
+| `assets/qr/qr-nafuu-logo.png` | QR seul avec l'œil au centre |
+| `assets/qr/qr-nafuu.png` / `.svg` | QR simple (le SVG s'imprime à n'importe quelle taille) |
 
-**Utilisation :** ouvrez le fichier dans un navigateur, remplissez les zones orangées,
-puis cliquez sur **Imprimer / Enregistrer en PDF** et envoyez le PDF au client.
-Rien n'est enregistré : gardez le PDF de chaque devis et contrat signé.
+Le QR pointe vers https://nafuu973.github.io/photography/ (correction d'erreur
+maximale : il reste lisible même abîmé ou imprimé petit, 2 cm minimum).
 
-Une fois le site en ligne, ils sont aussi accessibles à
-`https://nafuu973.github.io/photography/documents/devis.html` (non référencés sur Google,
-et ne contiennent aucune donnée client).
+## Mise en ligne (GitHub Pages)
+
+1. Le dépôt doit être **public** : Settings → General → Danger Zone → Change visibility.
+2. Settings → **Pages** → Source : **Deploy from a branch**.
+3. Branche : celle qui contient `index.html`, dossier `/ (root)` → **Save**.
+4. Cocher **Enforce HTTPS**. La page est en ligne en 1 à 2 minutes.
+
+## Documents commerciaux
+
+Ouvrez `documents/devis.html` ou `documents/contrat-mariage.html` dans un
+navigateur, remplissez les zones orangées, puis **Imprimer / Enregistrer en PDF**.
+Rien n'est enregistré ni envoyé : gardez le PDF de chaque devis et contrat signé.
 
 > ⚠️ Ces modèles ne remplacent pas un conseil juridique : faites relire le contrat
-> une fois, par exemple par la CCI ou un juriste. Pensez aussi à adhérer à un
-> **médiateur de la consommation** (obligatoire pour vendre à des particuliers) et à
-> indiquer son nom dans l'article 11 du contrat.
+> une fois (CCI, juriste). Adhérez à un **médiateur de la consommation**
+> (obligatoire pour vendre à des particuliers) et indiquez-le dans l'article 11.

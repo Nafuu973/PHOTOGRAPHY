@@ -15,6 +15,10 @@ body {
   font-size: 13.5px; line-height: 1.5; color: var(--ink);
 }
 
+.mt-s { margin-top: 8px; }
+.mt-m { margin-top: 14px; }
+.mt-l { margin-top: 18px; }
+
 /* Barre d'outils (non imprimée) */
 .toolbar {
   max-width: 210mm; margin: 0 auto 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
@@ -65,6 +69,10 @@ td.num, th.num { text-align: right; white-space: nowrap; }
 td input {
   width: 100%; font: inherit; border: 0; background: var(--field); padding: 2px 4px; border-radius: 2px; text-align: right;
 }
+.w-qty { width: 70px; } .w-pu { width: 110px; } .w-total { width: 100px; } .w-del { width: 24px; }
+.f.block { display: block; }
+.pct { width: 3.4em; font: inherit; border: 0; background: var(--field); text-align: right; border-radius: 2px; }
+.tva-mention { text-align: right; font-size: 12px; }
 .del { border: 0; background: none; color: #b0453a; cursor: pointer; font-size: 16px; padding: 0 4px; }
 
 .totals { margin-left: auto; width: min(100%, 300px); margin-top: 10px; }
@@ -97,7 +105,7 @@ footer.legal { margin-top: 24px; padding-top: 10px; border-top: 1px solid var(--
   .f { background: none; border-bottom: none; padding: 0; }
   .f:empty { border-bottom: 1px solid #999; min-width: 8em; }
   .f:empty::before { content: ""; }
-  td input { background: none; }
+  td input, .pct { background: none; }
   h2, h3 { break-after: avoid; }
   li, .box, tr { break-inside: avoid; }
 }

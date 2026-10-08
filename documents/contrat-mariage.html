@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contrat mariage · Nafuu</title>
   <meta name="robots" content="noindex">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
   <link rel="stylesheet" href="doc.css">
 </head>
 <body>
   <div class="toolbar">
-    <button class="primary" onclick="window.print()">Imprimer / Enregistrer en PDF</button>
+    <button type="button" class="primary" data-action="print">Imprimer / Enregistrer en PDF</button>
     <span class="hint">Remplissez les zones orangées, cochez les choix des mariés, puis enregistrez en PDF. Modèle à faire relire par un professionnel du droit avant le premier usage.</span>
   </div>
 
@@ -51,7 +51,7 @@
       Temps forts couverts : <span class="f" contenteditable data-ph="Préparatifs, cérémonie, couple, groupes, vin d'honneur, soirée…"></span><br>
       Livrables : environ <span class="f" contenteditable data-ph="…"></span> photos retouchées, galerie en ligne privée<span class="f" contenteditable data-ph=", tirages, album…"></span>
     </div>
-    <p style="margin-top:8px">Tout dépassement d'horaire demandé le jour J est facturé <span class="f" contenteditable data-ph="…"></span> € par heure entamée.</p>
+    <p class="mt-s">Tout dépassement d'horaire demandé le jour J est facturé <span class="f" contenteditable data-ph="…"></span> € par heure entamée.</p>
 
     <h2>Article 2 — Prix et paiement</h2>
     <p>Le prix total de la prestation est de <span class="f" contenteditable data-ph="…"></span> €, <span class="f" contenteditable data-ph="TVA non applicable, art. 293 B du CGI"></span>, selon le devis joint.</p>
@@ -104,7 +104,7 @@
     <h2>Article 11 — Litiges</h2>
     <p>Le présent contrat est soumis au droit français. En cas de désaccord, les parties recherchent d'abord une solution amiable. Les Clients peuvent recourir gratuitement au médiateur de la consommation : <span class="f" contenteditable data-ph="nom et site du médiateur"></span>. À défaut, le tribunal compétent est saisi.</p>
 
-    <p style="margin-top:18px">Fait en deux exemplaires, à <span class="f" contenteditable data-ph="Agen"></span>, le <span class="f" contenteditable data-ph="jj/mm/aaaa"></span>.</p>
+    <p class="mt-l">Fait en deux exemplaires, à <span class="f" contenteditable data-ph="Agen"></span>, le <span class="f" contenteditable data-ph="jj/mm/aaaa"></span>.</p>
     <div class="sign">
       <div class="box"><div class="label">Le Photographe</div>Signature</div>
       <div class="box"><div class="label">Les Clients</div>Signatures précédées de la mention<br><em>« Lu et approuvé »</em></div>
@@ -112,5 +112,6 @@
 
     <footer class="legal">Nafuu · nafuu.raw — 07 86 88 76 51 — nafuu.raw@gmail.com</footer>
   </div>
+  <script src="doc.js" defer></script>
 </body>
 </html>

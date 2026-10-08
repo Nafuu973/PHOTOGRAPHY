@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Devis · Nafuu</title>
   <meta name="robots" content="noindex">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
   <link rel="stylesheet" href="doc.css">
 </head>
 <body>
   <div class="toolbar">
-    <button class="primary" onclick="window.print()">Imprimer / Enregistrer en PDF</button>
-    <button onclick="addRow()">+ Ajouter une ligne</button>
+    <button type="button" class="primary" data-action="print">Imprimer / Enregistrer en PDF</button>
+    <button type="button" data-action="add-row">+ Ajouter une ligne</button>
     <label><input type="checkbox" id="tva"> Je facture la TVA (20 %)</label>
     <span class="hint">Cliquez sur les zones orangées pour les remplir, puis enregistrez en PDF pour l'envoyer au client.</span>
   </div>
@@ -32,7 +32,7 @@
     <h1>Devis n° <span class="f" contenteditable data-ph="2026-001"></span></h1>
     <p class="muted">Établi le <span class="f" contenteditable data-ph="jj/mm/aaaa"></span> · Valable 30 jours</p>
 
-    <div class="grid2" style="margin-top:14px">
+    <div class="grid2 mt-m">
       <div class="box">
         <div class="label">Client</div>
         <span class="f" contenteditable data-ph="Nom(s) du client"></span><br>
@@ -49,7 +49,7 @@
 
     <h2>Détail</h2>
     <table>
-      <thead><tr><th>Description</th><th class="num" style="width:70px">Qté</th><th class="num" style="width:110px">Prix unit. €</th><th class="num" style="width:100px">Total €</th><th class="no-print" style="width:24px"></th></tr></thead>
+      <thead><tr><th>Description</th><th class="num w-qty">Qté</th><th class="num w-pu">Prix unit. €</th><th class="num w-total">Total €</th><th class="no-print w-del"></th></tr></thead>
       <tbody id="lines"></tbody>
     </table>
 
@@ -57,10 +57,10 @@
       <div><span>Total HT</span><span id="ht">0,00 €</span></div>
       <div id="tva-row" hidden><span>TVA 20 %</span><span id="tvaval">0,00 €</span></div>
       <div class="grand"><span id="ttc-label">Total net</span><span id="ttc">0,00 €</span></div>
-      <div><span>Acompte à la signature (<input id="pct" type="number" value="30" min="0" max="100" style="width:3.2em;font:inherit;border:0;background:var(--field);text-align:right"> %)</span><span id="acompte">0,00 €</span></div>
+      <div><span>Acompte à la signature (<input id="pct" class="pct" type="number" value="30" min="0" max="100" aria-label="Pourcentage d'acompte"> %)</span><span id="acompte">0,00 €</span></div>
       <div><span>Solde</span><span id="solde">0,00 €</span></div>
     </div>
-    <p id="tva-mention" class="muted" style="text-align:right;font-size:12px">TVA non applicable, art. 293 B du CGI</p>
+    <p id="tva-mention" class="muted tva-mention">TVA non applicable, art. 293 B du CGI</p>
 
     <h2>Ce qui est inclus</h2>
     <p><span class="f" contenteditable data-ph="Ex. : préparation de la séance, prises de vue à l'objectif anamorphique, sélection et retouche « cinéma » d'environ … photos, galerie en ligne privée, … tirage(s) 10×15 cm."></span></p>
@@ -82,58 +82,7 @@
 
   </div>
 
-  <script>
-    const DEFAUT = [
-      ['Couverture photo (préparation et prises de vue)', 1, 0],
-      ['Sélection, retouche « cinéma » et galerie en ligne privée', 1, 0],
-      ['Tirage(s) photo 10×15 cm', 1, 0],
-      ['Frais de déplacement', 1, 0],
-    ];
-    const euro = n => n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
-    const tbody = document.getElementById('lines');
-
-    function addRow(desc = '', qty = 1, pu = 0) {
-      const tr = document.createElement('tr');
-      tr.innerHTML = '<td><span class="f" contenteditable data-ph="Description" style="display:block"></span></td>'
-        + '<td class="num"><input type="number" min="0" step="1"></td>'
-        + '<td class="num"><input type="number" min="0" step="0.01"></td>'
-        + '<td class="num total">0,00 €</td>'
-        + '<td class="no-print"><button class="del" title="Supprimer la ligne" aria-label="Supprimer la ligne">×</button></td>';
-      tr.querySelector('.f').textContent = desc;
-      const [q, p] = tr.querySelectorAll('input');
-      q.value = qty; p.value = pu || '';
-      tr.addEventListener('input', recalc);
-      tr.querySelector('.del').onclick = () => { tr.remove(); recalc(); };
-      tbody.appendChild(tr);
-      recalc();
-    }
-
-    function recalc() {
-      let ht = 0;
-      tbody.querySelectorAll('tr').forEach(tr => {
-        const [q, p] = tr.querySelectorAll('input');
-        const t = (parseFloat(q.value) || 0) * (parseFloat(p.value) || 0);
-        tr.querySelector('.total').textContent = euro(t);
-        ht += t;
-      });
-      const avecTva = document.getElementById('tva').checked;
-      const tva = avecTva ? ht * 0.2 : 0;
-      const ttc = ht + tva;
-      const pct = Math.min(100, Math.max(0, parseFloat(document.getElementById('pct').value) || 0));
-      const acompte = Math.round(ttc * pct) / 100;
-      document.getElementById('ht').textContent = euro(ht);
-      document.getElementById('tvaval').textContent = euro(tva);
-      document.getElementById('tva-row').hidden = !avecTva;
-      document.getElementById('tva-mention').hidden = avecTva;
-      document.getElementById('ttc-label').textContent = avecTva ? 'Total TTC' : 'Total net';
-      document.getElementById('ttc').textContent = euro(ttc);
-      document.getElementById('acompte').textContent = euro(acompte);
-      document.getElementById('solde').textContent = euro(ttc - acompte);
-    }
-
-    document.getElementById('tva').addEventListener('change', recalc);
-    document.getElementById('pct').addEventListener('input', recalc);
-    DEFAUT.forEach(r => addRow(...r));
-  </script>
+  <script src="doc.js" defer></script>
+  <script src="devis.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,219 @@
+/* ==========================================================================
+   nafuu.raw — page de liens
+   Sommaire : 1. Variables  2. Base  3. Profil  4. Contact  5. Sections
+              6. Cartes & liens  7. Étapes  8. Barre d'action mobile  9. Pied de page
+   ========================================================================== */
+
+/* 1. Variables ------------------------------------------------------------ */
+:root {
+  --bg: #0b0a09;
+  --surface: #161412;
+  --surface-hover: #1f1c18;
+  --text: #f3eee7;
+  --text-soft: #d2c8bc;
+  --muted: #a89e92;          /* contraste 7:1 sur --bg */
+  --border: #2c2824;
+  --border-strong: #3d362f;
+  --amber: #e8954a;          /* contraste 7.9:1 sur --bg */
+  --amber-soft: rgba(232, 149, 74, .14);
+  --amber-text: #f5bf8c;
+  --on-amber: #170d04;
+  --whatsapp: #25d366;
+
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+
+  --radius: 16px;
+  --gutter: 16px;
+  --max: 480px;
+  --cta-bar: 76px;
+}
+
+/* 2. Base ----------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: dark; }
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse 100% 40% at 50% 0%, rgba(232, 149, 74, .15), transparent 70%),
+    radial-gradient(ellipse 80% 35% at 50% 100%, rgba(40, 95, 100, .16), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+
+.skip-link {
+  position: absolute; left: var(--gutter); top: -100px; z-index: 10;
+  padding: 10px 14px; border-radius: 10px; background: var(--amber); color: var(--on-amber);
+  font-weight: 600; text-decoration: none;
+}
+.skip-link:focus { top: var(--gutter); }
+
+.page {
+  width: 100%; max-width: calc(var(--max) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 40px var(--gutter) calc(var(--cta-bar) + 32px + env(safe-area-inset-bottom));
+}
+
+.sr-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.icon { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* 3. Profil --------------------------------------------------------------- */
+.profile { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.avatar {
+  width: 116px; height: 116px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--amber);
+  box-shadow: 0 0 0 6px var(--amber-soft), 0 12px 32px rgba(0, 0, 0, .55);
+}
+.profile h1 {
+  margin-top: 18px;
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2.25rem, 9vw, 2.75rem); line-height: 1; letter-spacing: .01em;
+}
+.handle { margin-top: 6px; color: var(--muted); font-size: .9rem; letter-spacing: .04em; }
+.tagline {
+  margin-top: 16px; max-width: 22ch;
+  font-family: var(--font-display); font-style: italic; font-weight: 500;
+  font-size: clamp(1.35rem, 5.6vw, 1.55rem); line-height: 1.25;
+}
+.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; padding: 0; list-style: none; }
+.badges li {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border-strong);
+  font-size: .8rem; color: var(--text-soft);
+}
+.badges .icon { width: 15px; height: 15px; color: var(--amber); }
+
+/* Bouton d'action principal */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 14px 22px; border-radius: 999px;
+  background: var(--amber); color: var(--on-amber);
+  font-weight: 600; font-size: 1rem; text-decoration: none;
+  transition: transform .15s ease, background-color .15s ease;
+}
+.btn:hover { background: #f0a462; transform: translateY(-1px); }
+.btn .icon { width: 20px; height: 20px; }
+.profile .btn { margin-top: 22px; width: 100%; }
+.reassure { margin-top: 8px; font-size: .8rem; color: var(--muted); }
+
+/* 4. Contact -------------------------------------------------------------- */
+.contact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; padding: 0; list-style: none; }
+.contact a {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  min-height: 64px; padding: 10px 4px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  font-size: .75rem; font-weight: 500; text-decoration: none;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.contact a:hover { background: var(--surface-hover); border-color: var(--border-strong); }
+.contact .icon { width: 20px; height: 20px; color: var(--amber); }
+.contact .is-whatsapp .icon { color: var(--whatsapp); }
+
+/* 5. Sections ------------------------------------------------------------- */
+.section { margin-top: 36px; }
+.section-title {
+  margin-bottom: 12px;
+  font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--muted);
+}
+.stack { display: grid; gap: 12px; padding: 0; list-style: none; }
+
+/* 6. Cartes & liens ------------------------------------------------------- */
+.card {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 20px; border-radius: var(--radius);
+  background: linear-gradient(160deg, #1f1812, var(--surface) 60%);
+  border: 1px solid #3f2d1e;
+  text-decoration: none;
+  transition: transform .15s ease, border-color .15s ease;
+}
+.card:hover { transform: translateY(-2px); border-color: #5a3f27; }
+.card-head { display: flex; align-items: center; gap: 12px; }
+.card-head .icon { color: var(--amber); }
+.card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; line-height: 1.1; }
+.card p { font-size: .92rem; color: var(--text-soft); line-height: 1.5; }
+.card .tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; list-style: none; }
+.card .tags li { font-size: .75rem; padding: 4px 10px; border-radius: 999px; background: var(--amber-soft); color: var(--amber-text); }
+.card-cta {
+  align-self: flex-start; margin-top: 4px;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px;
+  padding: 9px 16px; border-radius: 999px;
+  background: var(--amber); color: var(--on-amber);
+  font-size: .9rem; font-weight: 600;
+}
+.card-cta::after { content: "→"; }
+.card-label {
+  align-self: flex-start;
+  font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--amber-text);
+}
+
+.link {
+  display: flex; align-items: center; gap: 14px;
+  min-height: 64px; padding: 14px 18px; border-radius: 14px;
+  background: var(--surface); border: 1px solid var(--border);
+  text-decoration: none;
+  transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+}
+.link:hover { transform: translateY(-2px); background: var(--surface-hover); border-color: var(--border-strong); }
+.link .icon { color: var(--amber); }
+.link-text { flex: 1; min-width: 0; }
+.link-title { display: block; font-weight: 600; }
+.link-sub { display: block; margin-top: 2px; font-size: .82rem; color: var(--muted); line-height: 1.4; }
+.link::after { content: "→"; color: var(--muted); font-size: 1.1rem; }
+
+/* 7. Étapes --------------------------------------------------------------- */
+.steps { display: grid; gap: 12px; padding: 0; list-style: none; counter-reset: step; }
+.steps li { display: flex; gap: 14px; align-items: flex-start; font-size: .92rem; color: var(--text-soft); }
+.steps li::before {
+  counter-increment: step; content: counter(step);
+  flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid var(--amber); color: var(--amber); font-size: .82rem; font-weight: 600;
+}
+.steps strong { color: var(--text); font-weight: 600; }
+
+/* 8. Barre d'action fixe -------------------------------------------------- */
+.cta-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;
+  padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(11, 10, 9, .97) 60%, rgba(11, 10, 9, 0));
+  transform: translateY(110%); visibility: hidden;
+  transition: transform .25s ease, visibility .25s;
+}
+.cta-bar.is-visible { transform: none; visibility: visible; }
+.cta-bar .btn { display: flex; width: 100%; max-width: var(--max); margin: 0 auto; box-shadow: 0 8px 24px rgba(0, 0, 0, .5); }
+
+/* 9. Pied de page --------------------------------------------------------- */
+.footer { margin-top: 40px; text-align: center; font-size: .8rem; color: var(--muted); }
+.footer a { color: var(--text-soft); text-decoration: underline; text-underline-offset: 3px; }
+.footer p + p { margin-top: 4px; }
+
+/* Petits écrans (≤ 360 px) */
+@media (max-width: 360px) {
+  .contact { grid-template-columns: repeat(2, 1fr); }
+  .card { padding: 16px; }
+  .card h3 { font-size: 1.4rem; }
+  .btn { padding: 14px 16px; font-size: .95rem; gap: 8px; }
+}
+
+/* Grands écrans : un peu plus d'air */
+@media (min-width: 768px) {
+  .page { padding-top: 64px; }
+  .avatar { width: 128px; height: 128px; }
+}
+
+/* Accessibilité : animations réduites */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+  .card:hover, .link:hover, .btn:hover { transform: none; }
+}

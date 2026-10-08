@@ -2,228 +2,179 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nafuu · Photographe à Agen</title>
-  <meta name="description" content="L'esthétique du cinéma appliquée à la photo. Shootings privés et mariages à Agen et alentours, à l'objectif anamorphique.">
-  <meta property="og:title" content="Nafuu · Photographe à Agen">
-  <meta property="og:description" content="L'esthétique du cinéma appliquée à la photo. Shootings privés & mariages.">
-  <meta property="og:image" content="images/profil.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Nafuu · Photographe mariage &amp; shooting à Agen</title>
+  <meta name="description" content="L'esthétique du cinéma appliquée à la photo. Photographe à Agen : mariages, shootings privés (portrait, couple, véhicule, animaux). Devis gratuit et sur mesure.">
+  <link rel="canonical" href="https://nafuu973.github.io/photography/">
   <meta name="theme-color" content="#0b0a09">
-  <link rel="icon" href="images/profil.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0b0a09;
-      --surface: #161412;
-      --surface-hover: #1e1b18;
-      --text: #f3eee7;
-      --muted: #a39a8f;
-      --border: #2a2622;
-      --amber: #e08a3c;
-      --amber-soft: rgba(224, 138, 60, .14);
-      --on-amber: #140c05;
-    }
-    * { box-sizing: border-box; margin: 0; }
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(ellipse 90% 45% at 50% 0%, rgba(224,138,60,.16), transparent 70%),
-        radial-gradient(ellipse 70% 40% at 50% 100%, rgba(40,90,95,.18), transparent 70%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, system-ui, -apple-system, sans-serif;
-      display: flex;
-      justify-content: center;
-      padding: 48px 16px 32px;
-      -webkit-font-smoothing: antialiased;
-    }
-    /* Grain argentique léger */
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .06;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-    main { position: relative; width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; }
 
-    .avatar {
-      width: 112px; height: 112px; border-radius: 50%; overflow: hidden;
-      border: 2px solid var(--amber);
-      box-shadow: 0 0 0 6px var(--amber-soft), 0 10px 30px rgba(0,0,0,.5);
-    }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  <!-- Partage (WhatsApp, Facebook, Instagram…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://nafuu973.github.io/photography/">
+  <meta property="og:title" content="Nafuu · Photographe mariage & shooting à Agen">
+  <meta property="og:description" content="L'esthétique du cinéma appliquée à la photo. Devis gratuit et sur mesure.">
+  <meta property="og:image" content="https://nafuu973.github.io/photography/assets/img/partage.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nafuu, photographe à Agen — l'esthétique du cinéma appliquée à la photo">
+  <meta name="twitter:card" content="summary_large_image">
 
-    h1 {
-      margin-top: 18px;
-      font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
-      font-size: 38px; line-height: 1; letter-spacing: .01em;
-    }
-    .handle { margin-top: 6px; color: var(--muted); font-size: 14px; letter-spacing: .04em; }
-    .tagline {
-      margin-top: 16px; text-align: center;
-      font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 500;
-      font-size: 21px; line-height: 1.3;
-    }
-    .meta { margin-top: 8px; color: var(--muted); font-size: 13px; text-align: center; }
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 
-    h2 {
-      align-self: flex-start; margin: 32px 0 12px;
-      font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--muted);
-    }
-    nav { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-
-    .link {
-      display: flex; align-items: center; gap: 14px;
-      padding: 16px 18px; border-radius: 14px;
-      background: var(--surface); border: 1px solid var(--border);
-      color: var(--text); text-decoration: none;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    .link:hover { transform: translateY(-2px); background: var(--surface-hover); border-color: #3a342e; }
-    .link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
-    .link svg { width: 22px; height: 22px; flex: none; color: var(--amber); }
-    .link .label { flex: 1; min-width: 0; }
-    .link .title { display: block; font-weight: 600; font-size: 16px; }
-    .link .sub { display: block; font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
-    .link .arrow { color: var(--muted); font-size: 18px; }
-
-    /* Offres principales */
-    .link.offer { flex-direction: column; align-items: stretch; gap: 10px; padding: 20px; border-color: #3a2a1c; background: linear-gradient(160deg, #1d1712, var(--surface)); }
-    .link.offer .head { display: flex; align-items: center; gap: 12px; }
-    .link.offer .title { font-family: "Cormorant Garamond", Georgia, serif; font-size: 24px; font-weight: 600; }
-    .link.offer .sub { font-size: 14px; color: #c9bfb3; margin-top: 0; }
-    .link.offer .cta {
-      margin-top: 4px; align-self: flex-start;
-      padding: 9px 14px; border-radius: 999px;
-      background: var(--amber); color: var(--on-amber);
-      font-size: 14px; font-weight: 600;
-    }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tags span { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: var(--amber-soft); color: #f0b77f; }
-
-    .contact { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 22px; }
-    .contact a {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      padding: 12px 6px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border);
-      color: var(--text); text-decoration: none; font-size: 12px; font-weight: 500;
-    }
-    .contact a:hover { background: var(--surface-hover); }
-    .contact svg { width: 20px; height: 20px; color: var(--amber); }
-    .contact a.wa svg { color: #25d366; }
-
-    .steps { width: 100%; list-style: none; padding: 0; display: grid; gap: 10px; counter-reset: step; }
-    .steps li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; line-height: 1.45; color: #d6cdc2; }
-    .steps li::before {
-      counter-increment: step; content: counter(step);
-      flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
-      border: 1px solid var(--amber); color: var(--amber); font-size: 13px; font-weight: 600;
-    }
-    .steps strong { color: var(--text); font-weight: 600; }
-
-    footer { margin-top: 40px; font-size: 12px; color: var(--muted); text-align: center; }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Nafuu · nafuu.raw",
+    "description": "Photographe mariage et shooting privé à Agen, à l'esthétique cinéma (objectif anamorphique).",
+    "url": "https://nafuu973.github.io/photography/",
+    "image": "https://nafuu973.github.io/photography/assets/img/profil.jpg",
+    "telephone": "+33786887651",
+    "email": "nafuu.raw@gmail.com",
+    "areaServed": "Agen et alentours",
+    "address": { "@type": "PostalAddress", "addressLocality": "Agen", "addressCountry": "FR" },
+    "sameAs": ["https://www.instagram.com/nafuu.raw/"]
+  }
+  </script>
 </head>
 <body>
-  <main>
-    <div class="avatar"><img src="images/profil.jpg" alt="Nafuu, photographe"></div>
-    <h1>Nafuu</h1>
-    <p class="handle">@nafuu.raw</p>
-    <p class="tagline">L'esthétique du cinéma appliquée à la photo</p>
-    <p class="meta">Objectif anamorphique · Agen &amp; alentours<br>Devis gratuit et 100 % personnalisé</p>
+  <!-- Icônes (sprite SVG réutilisé via <use>) -->
+  <svg width="0" height="0" class="sr-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+    <symbol id="i-rings" viewBox="0 0 24 24"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/><path d="M10 4l2 3 2-3"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8S10.5 3 8 4.5 9 8 12 8zm0 0s1.5-5 4-3.5S15 8 12 8z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1.2-.5-2.3-1.6-2.8-2.8l.9-1-1-2z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+    <symbol id="i-album" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 9"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  </svg>
 
-    <div class="contact">
-      <a class="wa" href="https://wa.me/33786887651" data-wa="Bonjour Nafuu ! Je vous contacte depuis votre page." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .9c-1.2-.5-2.3-1.6-2.8-2.8l.9-1-1-2z"/></svg>WhatsApp</a>
-      <a href="tel:+33786887651"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Appeler</a>
-      <a href="mailto:nafuu.raw@gmail.com?subject=Demande%20de%20devis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>E-mail</a>
-      <a href="https://ig.me/m/nafuu.raw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.7A8.4 8.4 0 1 1 21 11.5z"/></svg>Instagram</a>
-    </div>
+  <a class="skip-link" href="#reserver">Aller aux offres</a>
 
-    <h2>Réserver</h2>
-    <nav aria-label="Réserver">
-      <!-- Offre 1 : shootings privés (le bouton ouvre WhatsApp avec un message pré-rempli : voir data-wa) -->
-      <a class="link offer" href="https://wa.me/33786887651" data-wa="Bonjour Nafuu ! Je souhaite réserver un shooting privé.&#10;Type de séance (portrait, couple, véhicule, animal) : &#10;Date souhaitée : &#10;Lieu : " target="_blank" rel="noopener">
-        <span class="head">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
-          <span class="title">Shooting privé</span>
-        </span>
-        <span class="sub">Une séance détendue, pensée comme une scène de film, construite autour de votre idée. Tirage photo inclus.</span>
-        <span class="tags"><span>Portrait</span><span>Couple</span><span>Véhicule</span><span>Animaux</span></span>
-        <span class="cta">Demander mon devis →</span>
+  <main class="page">
+    <!-- Profil -->
+    <header class="profile">
+      <img class="avatar" src="assets/img/profil.jpg" width="480" height="480" alt="Logo de Nafuu : gros plan d'un œil" fetchpriority="high">
+      <h1>Nafuu</h1>
+      <p class="handle">@nafuu.raw · Photographe</p>
+      <p class="tagline">L'esthétique du cinéma appliquée à la photo</p>
+      <ul class="badges" aria-label="Points forts">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-film"/></svg>Objectif anamorphique</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Devis gratuit &amp; sur mesure</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Agen &amp; alentours</li>
+      </ul>
+
+      <a class="btn" id="cta-principal" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20J%27aimerais%20un%20devis.%0APrestation%20%28mariage%2C%20shooting%E2%80%A6%29%20%3A%20%0ADate%20%3A%20%0ALieu%20%3A%20" target="_blank" rel="noopener noreferrer">
+        <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Demander mon devis gratuit
       </a>
+      <p class="reassure">Sans engagement · Réponse sur WhatsApp</p>
 
-      <!-- Offre 2 : mariages & événements -->
-      <a class="link offer" href="https://wa.me/33786887651" data-wa="Bonjour Nafuu ! Nous aimerions un devis pour notre mariage.&#10;Date : &#10;Lieu : &#10;Nombre d'invités (environ) : " target="_blank" rel="noopener">
-        <span class="head">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/><path d="M10 4l2 3 2-3"/></svg>
-          <span class="title">Mariage &amp; événement</span>
-        </span>
-        <span class="sub">Votre journée racontée comme un film : préparatifs, émotions, lumière. Une prestation sur mesure, selon votre programme.</span>
-        <span class="cta">Demander mon devis →</span>
-      </a>
+      <ul class="contact" aria-label="Me contacter">
+        <li><a class="is-whatsapp" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20vous%20contacte%20depuis%20votre%20page." target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a></li>
+        <li><a href="tel:+33786887651"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a></li>
+        <li><a href="mailto:nafuu.raw@gmail.com?subject=Demande%20de%20devis"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>E-mail</a></li>
+        <li><a href="https://www.instagram.com/nafuu.raw/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram</a></li>
+      </ul>
+    </header>
 
-      <!-- Offre 3 : carte cadeau -->
-      <a class="link" href="https://wa.me/33786887651" data-wa="Bonjour Nafuu ! Je souhaite offrir un shooting en carte cadeau. Pour qui / quelle occasion : " target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8S10.5 3 8 4.5 9 8 12 8zm0 0s1.5-5 4-3.5S15 8 12 8z"/></svg>
-        <span class="label"><span class="title">Offrir un shooting</span><span class="sub">Carte cadeau : anniversaire, Noël, couple…</span></span>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </nav>
-
-    <h2>Comment ça marche</h2>
-    <ol class="steps">
-      <li><span><strong>Vous m'écrivez</strong> sur WhatsApp avec votre idée et vos dates.</span></li>
-      <li><span><strong>Je vous envoie un devis</strong> personnalisé, gratuit et sans engagement.</span></li>
-      <li><span><strong>On prépare ensemble</strong> le lieu, l'ambiance et la lumière, comme un tournage.</span></li>
-      <li><span><strong>Vous recevez vos photos</strong> retouchées dans un album en ligne, plus votre tirage.</span></li>
-    </ol>
-
-    <!-- Galeries : affichées seulement si la liste GALERIES (en bas de page) n'est pas vide -->
-    <section id="galeries" hidden style="width:100%">
-      <h2>Galeries</h2>
-      <nav aria-label="Galeries" id="galeries-liste"></nav>
+    <!-- Offres -->
+    <section class="section" id="reserver" aria-labelledby="titre-offres">
+      <h2 class="section-title" id="titre-offres">Mes prestations</h2>
+      <ul class="stack">
+        <li>
+          <a class="card" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Nous%20aimerions%20un%20devis%20pour%20notre%20mariage.%0ADate%20%3A%20%0ALieu%20%3A%20%0ANombre%20d%27invit%C3%A9s%20%28environ%29%20%3A%20" target="_blank" rel="noopener noreferrer">
+            <div class="card-head"><svg class="icon" aria-hidden="true"><use href="#i-rings"/></svg><h3>Mariage &amp; événement</h3></div>
+            <p>Votre journée racontée comme un film : préparatifs, émotions, lumière. Une prestation sur mesure, construite autour de votre programme.</p>
+            <span class="card-cta">Demander mon devis</span>
+          </a>
+        </li>
+        <li>
+          <a class="card" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20souhaite%20r%C3%A9server%20un%20shooting%20priv%C3%A9.%0AType%20de%20s%C3%A9ance%20%28portrait%2C%20couple%2C%20v%C3%A9hicule%2C%20animal%29%20%3A%20%0ADate%20souhait%C3%A9e%20%3A%20%0ALieu%20%3A%20" target="_blank" rel="noopener noreferrer">
+            <div class="card-head"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><h3>Shooting privé</h3></div>
+            <p>Une séance détendue, pensée comme une scène de film autour de votre idée. Tirage photo inclus.</p>
+            <ul class="tags" aria-label="Types de séance"><li>Portrait</li><li>Couple</li><li>Véhicule</li><li>Animaux</li></ul>
+            <span class="card-cta">Réserver ma séance</span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20souhaite%20offrir%20un%20shooting%20en%20carte%20cadeau.%0APour%20qui%20%2F%20quelle%20occasion%20%3A%20" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" aria-hidden="true"><use href="#i-gift"/></svg>
+            <span class="link-text"><span class="link-title">Offrir un shooting</span><span class="link-sub">Carte cadeau : anniversaire, Noël, couple…</span></span>
+          </a>
+        </li>
+      </ul>
     </section>
 
-    <h2>Découvrir</h2>
-    <nav aria-label="Découvrir">
-      <a class="link" href="https://www.instagram.com/nafuu.raw/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        <span class="label"><span class="title">Portfolio Instagram</span><span class="sub">Portraits, mariages, sport auto, nature</span></span>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
+    <!-- Déroulé -->
+    <section class="section" aria-labelledby="titre-etapes">
+      <h2 class="section-title" id="titre-etapes">Comment ça marche</h2>
+      <ol class="steps">
+        <li><span><strong>Vous m'écrivez</strong> avec votre idée et vos dates.</span></li>
+        <li><span><strong>Je vous envoie un devis</strong> personnalisé, gratuit et sans engagement.</span></li>
+        <li><span><strong>On prépare ensemble</strong> le lieu, l'ambiance et la lumière, comme un tournage.</span></li>
+        <li><span><strong>Vous recevez vos photos</strong> retouchées dans un album en ligne privé.</span></li>
+      </ol>
+    </section>
 
-      <a class="link" href="https://pots.lydia.me/collect/pots?id=57192-moto" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 9"/></svg>
-        <span class="label"><span class="title">Albums des événements</span><span class="sub">Vous étiez à un événement que j'ai photographié ? Participez librement pour recevoir l'album complet.</span></span>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    </nav>
+    <!--
+      Galeries : décommentez ce bloc et dupliquez un <li> par album Google Photos.
+    <section class="section" aria-labelledby="titre-galeries">
+      <h2 class="section-title" id="titre-galeries">Galeries</h2>
+      <ul class="stack">
+        <li>
+          <a class="link" href="https://photos.app.goo.gl/XXXX" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" aria-hidden="true"><use href="#i-album"/></svg>
+            <span class="link-text"><span class="link-title">Titre de l'album</span><span class="link-sub">Lieu, année</span></span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    -->
 
-    <footer>© <span id="year"></span> Nafuu · nafuu.raw — Agen</footer>
+    <!-- Liens secondaires -->
+    <section class="section" aria-labelledby="titre-decouvrir">
+      <h2 class="section-title" id="titre-decouvrir">Découvrir</h2>
+      <ul class="stack">
+        <li>
+          <a class="link" href="https://www.instagram.com/nafuu.raw/" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
+            <span class="link-text"><span class="link-title">Portfolio Instagram</span><span class="link-sub">Portraits, mariages, sport auto, nature</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="link" href="https://pots.lydia.me/collect/pots?id=57192-moto" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" aria-hidden="true"><use href="#i-album"/></svg>
+            <span class="link-text"><span class="link-title">Albums des événements</span><span class="link-sub">Vous étiez à un événement que j'ai photographié ? Participez librement pour recevoir l'album complet.</span></span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p><a href="mailto:nafuu.raw@gmail.com">nafuu.raw@gmail.com</a> · <a href="tel:+33786887651">07 86 88 76 51</a></p>
+      <p>© Nafuu · nafuu.raw — Photographe à Agen</p>
+    </footer>
   </main>
-  <script>
-    // ✏️ Vos meilleurs albums Google Photos : ajoutez une ligne par album
-    //    { titre: "Mariage de Léa & Tom", detail: "Château de …, 2026", lien: "https://photos.app.goo.gl/…" },
-    const GALERIES = [
-    ];
 
-    const liste = document.getElementById('galeries-liste');
-    GALERIES.forEach(g => {
-      const a = document.createElement('a');
-      a.className = 'link'; a.href = g.lien; a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 9"/></svg>'
-        + '<span class="label"><span class="title"></span><span class="sub"></span></span><span class="arrow" aria-hidden="true">→</span>';
-      a.querySelector('.title').textContent = g.titre;
-      a.querySelector('.sub').textContent = g.detail || '';
-      liste.appendChild(a);
-    });
-    if (GALERIES.length) document.getElementById('galeries').hidden = false;
+  <!-- Bouton de réservation toujours visible -->
+  <div class="cta-bar" aria-hidden="true">
+    <a class="btn" tabindex="-1" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20J%27aimerais%20un%20devis.%0APrestation%20%28mariage%2C%20shooting%E2%80%A6%29%20%3A%20%0ADate%20%3A%20%0ALieu%20%3A%20" target="_blank" rel="noopener noreferrer">
+      <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>Demander mon devis gratuit
+    </a>
+  </div>
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-    // Ajoute le message pré-rempli aux liens WhatsApp
-    document.querySelectorAll('a[data-wa]').forEach(a => {
-      a.href = 'https://wa.me/33786887651?text=' + encodeURIComponent(a.dataset.wa);
-    });
-  </script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
