@@ -9,11 +9,11 @@ Tout se passe dans `index.html`. Les endroits à modifier sont signalés par ✏
 
 | Quoi | Où |
 |---|---|
-| Nom (onglet, titre, pied de page) | `Votre Nom` |
-| Initiales (si pas de photo) | `VN` |
+| Nom (onglet, titre, pied de page) | `nafuu.raw` |
+| Initiale (si pas de photo) | `N` |
 | Courte présentation | `<p class="bio">` |
 | Lien du portfolio | `https://votre-portfolio.com` |
-| Compte Instagram | `votre_compte` (2 fois) |
+| Compte Instagram | `nafuu.raw` (2 fois) |
 | Lien de la cagnotte | `https://votre-cagnotte.com` |
 
 **Photo de profil :** ajoutez une image carrée nommée `profil.jpg` dans le dossier `images/`.
