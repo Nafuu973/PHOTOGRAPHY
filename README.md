@@ -24,6 +24,8 @@ ouvrez le fichier, cliquez sur le crayon ✏️, puis sur **Commit changes**.
 | Texte d'une offre | `<!-- Offre 1 …` et `<!-- Offre 2 …` |
 | Numéro WhatsApp / téléphone | `33786887651` (dans les liens `wa.me`, `tel:` et le script en bas) |
 | Message pré-rempli d'un bouton | l'attribut `data-wa="…"` du bouton (`&#10;` = retour à la ligne) |
+| Galeries (albums Google Photos) | la liste `GALERIES` dans le script en bas de page |
+| E-mail | `nafuu.raw@gmail.com` |
 | Lien de la cagnotte | `https://pots.lydia.me/…` |
 | Photo de profil | remplacez le fichier `images/profil.jpg` (image carrée) |
 
