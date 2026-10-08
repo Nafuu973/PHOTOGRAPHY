@@ -7,9 +7,12 @@ La page met en avant les deux offres qui rapportent le plus :
 
 1. **Shooting privé** : portrait, couple, véhicule, animaux
 2. **Mariage & événement**
+3. **Carte cadeau** (offrir un shooting)
 
-Elle propose ensuite le portfolio Instagram et la cagnotte Lydia.
-Les boutons de réservation ouvrent une conversation Instagram avec @nafuu.raw.
+Chaque bouton ouvre WhatsApp avec un message pré-rempli adapté (type de séance,
+date, lieu…), pour que le client n'ait plus qu'à compléter.
+Viennent ensuite le portfolio Instagram et les albums des événements bénévoles
+(accès à l'album complet contre une participation libre sur Lydia).
 
 ## Modifier la page
 
@@ -19,7 +22,8 @@ ouvrez le fichier, cliquez sur le crayon ✏️, puis sur **Commit changes**.
 | Quoi | Où chercher dans `index.html` |
 |---|---|
 | Texte d'une offre | `<!-- Offre 1 …` et `<!-- Offre 2 …` |
-| Lien de réservation | `https://ig.me/m/nafuu.raw` (2 fois) |
+| Numéro WhatsApp / téléphone | `33786887651` (dans les liens `wa.me`, `tel:` et le script en bas) |
+| Message pré-rempli d'un bouton | l'attribut `data-wa="…"` du bouton (`&#10;` = retour à la ligne) |
 | Lien de la cagnotte | `https://pots.lydia.me/…` |
 | Photo de profil | remplacez le fichier `images/profil.jpg` (image carrée) |
 
