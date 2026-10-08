@@ -3,7 +3,7 @@
 Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
-La page met en avant les deux offres qui rapportent le plus :
+La page met en avant les offres qui rapportent le plus :
 
 1. **Shooting privé** : portrait, couple, véhicule, animaux
 2. **Mariage & événement**
