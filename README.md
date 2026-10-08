@@ -3,7 +3,7 @@
 Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
-🔗 **Adresse publique :** https://nafuu973.github.io/photography/
+🔗 **Adresse publique :** https://nafuu973.github.io/PHOTOGRAPHY/
 
 La page met en avant les offres qui rapportent le plus : **mariage & événement**,
 **shooting privé** et **carte cadeau**. Chaque bouton ouvre WhatsApp avec un
@@ -65,7 +65,7 @@ crayon ✏️, puis sur **Commit changes**.
 | `assets/qr/qr-nafuu-logo.png` | QR seul avec l'œil au centre |
 | `assets/qr/qr-nafuu.png` / `.svg` | QR simple (le SVG s'imprime à n'importe quelle taille) |
 
-Le QR pointe vers https://nafuu973.github.io/photography/ (correction d'erreur
+Le QR pointe vers https://nafuu973.github.io/PHOTOGRAPHY/ (correction d'erreur
 maximale : il reste lisible même abîmé ou imprimé petit, 2 cm minimum).
 
 ## Mise en ligne (GitHub Pages)
