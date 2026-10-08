@@ -1,0 +1,103 @@
+/* Styles communs aux documents imprimables (devis, contrat) */
+:root {
+  --ink: #1b1916;
+  --muted: #6d655c;
+  --line: #ddd5ca;
+  --amber: #c2702b;
+  --field: #fff4e3;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: #ece8e2; }
+body {
+  margin: 0; padding: 24px 16px 64px;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-size: 13.5px; line-height: 1.5; color: var(--ink);
+}
+
+/* Barre d'outils (non imprimée) */
+.toolbar {
+  max-width: 210mm; margin: 0 auto 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  font-size: 13px; color: var(--muted);
+}
+.toolbar button {
+  font: inherit; font-weight: 600; cursor: pointer;
+  padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); background: #fff; color: var(--ink);
+}
+.toolbar button.primary { background: var(--amber); border-color: var(--amber); color: #fff; }
+.toolbar .hint { flex: 1 1 240px; }
+
+.page {
+  max-width: 210mm; margin: 0 auto; background: #fff;
+  padding: 18mm 16mm; box-shadow: 0 2px 18px rgba(0,0,0,.08);
+}
+@media (max-width: 640px) { .page { padding: 20px 16px; } }
+
+header.doc { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
+.brand { font-family: "Cormorant Garamond", Georgia, serif; font-size: 30px; font-weight: 600; line-height: 1; }
+.brand small { display: block; font-family: Inter, sans-serif; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); margin-top: 6px; }
+.issuer { font-size: 12px; color: var(--muted); text-align: right; }
+@media (max-width: 640px) { .issuer { text-align: left; } }
+
+h1 { font-family: "Cormorant Garamond", Georgia, serif; font-size: 28px; margin: 22px 0 4px; }
+h2 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin: 22px 0 8px; }
+h3 { font-size: 13.5px; margin: 16px 0 4px; }
+p { margin: 0 0 8px; }
+.muted { color: var(--muted); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+.box { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+.box .label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+
+/* Champs à compléter (surlignés à l'écran, neutres à l'impression) */
+.f {
+  background: var(--field); border-bottom: 1px dashed var(--amber);
+  padding: 0 3px; border-radius: 2px; min-width: 3em; display: inline-block; outline: none;
+}
+.f:focus { background: #ffe7c2; }
+.f:empty::before { content: attr(data-ph); color: #b39a7c; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+th { text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--ink); padding: 6px 6px; }
+td { border-bottom: 1px solid var(--line); padding: 7px 6px; vertical-align: top; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td input {
+  width: 100%; font: inherit; border: 0; background: var(--field); padding: 2px 4px; border-radius: 2px; text-align: right;
+}
+.del { border: 0; background: none; color: #b0453a; cursor: pointer; font-size: 16px; padding: 0 4px; }
+
+.totals { margin-left: auto; width: min(100%, 300px); margin-top: 10px; }
+.totals div { display: flex; justify-content: space-between; padding: 4px 0; }
+.totals .grand { border-top: 2px solid var(--ink); margin-top: 4px; padding-top: 8px; font-weight: 700; font-size: 15px; }
+
+ol.clauses { padding-left: 18px; }
+ol.clauses li { margin-bottom: 6px; }
+.check { display: flex; gap: 8px; align-items: flex-start; margin: 6px 0; }
+.check input { margin-top: 3px; }
+
+.sign { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.sign .box { min-height: 120px; }
+@media (max-width: 640px) { .sign { grid-template-columns: 1fr; } }
+
+footer.legal { margin-top: 24px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+
+@page { size: A4; margin: 0; }
+@media print {
+  html, body { background: #fff; padding: 0; }
+  .toolbar, .no-print, .del { display: none !important; }
+  body { font-size: 12px; line-height: 1.4; }
+  .page { box-shadow: none; max-width: none; padding: 10mm 14mm; }
+  h1 { margin-top: 12px; font-size: 25px; }
+  h2 { margin: 12px 0 5px; }
+  td { padding: 5px 6px; }
+  ol.clauses li { margin-bottom: 3px; }
+  .sign { margin-top: 12px; }
+  .sign .box { min-height: 85px; }
+  .f { background: none; border-bottom: none; padding: 0; }
+  .f:empty { border-bottom: 1px solid #999; min-width: 8em; }
+  .f:empty::before { content: ""; }
+  td input { background: none; }
+  h2, h3 { break-after: avoid; }
+  li, .box, tr { break-inside: avoid; }
+}
