@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- ✏️ Remplacez « Votre Nom » par votre nom ou celui de votre activité -->
+  <title>Votre Nom · Photographe</title>
+  <meta name="description" content="Photographe — portfolio, Instagram et cagnotte.">
+  <meta property="og:title" content="Votre Nom · Photographe">
+  <meta property="og:description" content="Portfolio, Instagram et cagnotte.">
+  <meta property="og:image" content="images/profil.jpg">
+  <meta name="theme-color" content="#111111">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f1ec;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+      --border: #e3ddd5;
+      --accent: #1a1a1a;
+      --accent-text: #ffffff;
+      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.05);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --surface: #1b1b1b;
+        --text: #f2efea;
+        --muted: #a39d96;
+        --border: #2c2c2c;
+        --accent: #f2efea;
+        --accent-text: #111111;
+        --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 56px 16px 32px;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; }
+
+    .avatar {
+      width: 112px; height: 112px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--border);
+      display: grid; place-items: center; overflow: hidden;
+      font-family: Fraunces, Georgia, serif; font-size: 40px; color: var(--muted);
+      box-shadow: var(--shadow); position: relative;
+    }
+    .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    h1 {
+      margin-top: 20px;
+      font-family: Fraunces, Georgia, serif; font-weight: 600;
+      font-size: 28px; letter-spacing: -.01em; text-align: center;
+    }
+    .bio { margin-top: 8px; color: var(--muted); font-size: 15px; line-height: 1.5; text-align: center; max-width: 34ch; }
+
+    nav { width: 100%; margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .link {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .link:hover { transform: translateY(-2px); border-color: var(--muted); }
+    .link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .link.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+    .link svg { width: 22px; height: 22px; flex: none; }
+    .link .label { flex: 1; }
+    .link .title { display: block; font-weight: 500; font-size: 16px; }
+    .link .sub { display: block; font-size: 13px; opacity: .7; margin-top: 2px; }
+    .link .arrow { opacity: .5; font-size: 18px; }
+
+    footer { margin-top: 40px; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <!-- ✏️ Photo de profil : déposez votre photo dans images/profil.jpg.
+         Tant qu'elle n'existe pas, vos initiales s'affichent à la place. -->
+    <div class="avatar">
+      <img src="images/profil.jpg" alt="Photo de profil" onerror="this.remove()">
+      <span aria-hidden="true">VN</span>
+    </div>
+
+    <!-- ✏️ Votre nom et une courte présentation -->
+    <h1>Votre Nom</h1>
+    <p class="bio">Photographe · Portrait, événements &amp; nature</p>
+
+    <nav aria-label="Liens">
+      <!-- ✏️ Lien 1 : votre portfolio (remplacez l'adresse dans href="...") -->
+      <a class="link primary" href="https://votre-portfolio.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <span class="label"><span class="title">Portfolio</span><span class="sub">Découvrir mon travail</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <!-- ✏️ Lien 2 : Instagram (remplacez « votre_compte » par votre identifiant) -->
+      <a class="link" href="https://www.instagram.com/votre_compte/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <span class="label"><span class="title">Instagram</span><span class="sub">@votre_compte</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+
+      <!-- ✏️ Lien 3 : votre cagnotte (Leetchi, HelloAsso, Ko-fi, Tipeee…) -->
+      <a class="link" href="https://votre-cagnotte.com" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+        <span class="label"><span class="title">Soutenir mon projet</span><span class="sub">Participer à la cagnotte</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+    <footer>© <span id="year"></span> Votre Nom</footer>
+  </main>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
