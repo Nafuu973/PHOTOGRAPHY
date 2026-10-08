@@ -3,127 +3,156 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- ✏️ Remplacez « nafuu.raw » par votre nom ou celui de votre activité -->
-  <title>nafuu.raw · Photographe</title>
-  <meta name="description" content="Photographe — portfolio, Instagram et cagnotte.">
-  <meta property="og:title" content="nafuu.raw · Photographe">
-  <meta property="og:description" content="Portfolio, Instagram et cagnotte.">
+  <title>Nafuu · Photographe à Agen</title>
+  <meta name="description" content="L'esthétique du cinéma appliquée à la photo. Shootings privés et mariages à Agen et alentours, à l'objectif anamorphique.">
+  <meta property="og:title" content="Nafuu · Photographe à Agen">
+  <meta property="og:description" content="L'esthétique du cinéma appliquée à la photo. Shootings privés & mariages.">
   <meta property="og:image" content="images/profil.jpg">
-  <meta name="theme-color" content="#111111">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
+  <meta name="theme-color" content="#0b0a09">
+  <link rel="icon" href="images/profil.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f4f1ec;
-      --surface: #ffffff;
-      --text: #1a1a1a;
-      --muted: #6b6560;
-      --border: #e3ddd5;
-      --accent: #1a1a1a;
-      --accent-text: #ffffff;
-      --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.05);
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111111;
-        --surface: #1b1b1b;
-        --text: #f2efea;
-        --muted: #a39d96;
-        --border: #2c2c2c;
-        --accent: #f2efea;
-        --accent-text: #111111;
-        --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 16px rgba(0,0,0,.25);
-      }
+      --bg: #0b0a09;
+      --surface: #161412;
+      --surface-hover: #1e1b18;
+      --text: #f3eee7;
+      --muted: #a39a8f;
+      --border: #2a2622;
+      --amber: #e08a3c;
+      --amber-soft: rgba(224, 138, 60, .14);
+      --on-amber: #140c05;
     }
     * { box-sizing: border-box; margin: 0; }
     body {
       min-height: 100vh;
-      background: var(--bg);
+      background:
+        radial-gradient(ellipse 90% 45% at 50% 0%, rgba(224,138,60,.16), transparent 70%),
+        radial-gradient(ellipse 70% 40% at 50% 100%, rgba(40,90,95,.18), transparent 70%),
+        var(--bg);
       color: var(--text);
       font-family: Inter, system-ui, -apple-system, sans-serif;
       display: flex;
       justify-content: center;
-      padding: 56px 16px 32px;
+      padding: 48px 16px 32px;
       -webkit-font-smoothing: antialiased;
     }
-    main { width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; }
+    /* Grain argentique léger */
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    main { position: relative; width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; }
 
     .avatar {
-      width: 112px; height: 112px; border-radius: 50%;
-      background: var(--surface); border: 1px solid var(--border);
-      display: grid; place-items: center; overflow: hidden;
-      font-family: Fraunces, Georgia, serif; font-size: 40px; color: var(--muted);
-      box-shadow: var(--shadow); position: relative;
+      width: 112px; height: 112px; border-radius: 50%; overflow: hidden;
+      border: 2px solid var(--amber);
+      box-shadow: 0 0 0 6px var(--amber-soft), 0 10px 30px rgba(0,0,0,.5);
     }
-    .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     h1 {
-      margin-top: 20px;
-      font-family: Fraunces, Georgia, serif; font-weight: 600;
-      font-size: 28px; letter-spacing: -.01em; text-align: center;
+      margin-top: 18px;
+      font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+      font-size: 38px; line-height: 1; letter-spacing: .01em;
     }
-    .bio { margin-top: 8px; color: var(--muted); font-size: 15px; line-height: 1.5; text-align: center; max-width: 34ch; }
+    .handle { margin-top: 6px; color: var(--muted); font-size: 14px; letter-spacing: .04em; }
+    .tagline {
+      margin-top: 16px; text-align: center;
+      font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-weight: 500;
+      font-size: 21px; line-height: 1.3;
+    }
+    .meta { margin-top: 8px; color: var(--muted); font-size: 13px; text-align: center; }
 
-    nav { width: 100%; margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    h2 {
+      align-self: flex-start; margin: 32px 0 12px;
+      font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    nav { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+
     .link {
       display: flex; align-items: center; gap: 14px;
       padding: 16px 18px; border-radius: 14px;
       background: var(--surface); border: 1px solid var(--border);
       color: var(--text); text-decoration: none;
-      box-shadow: var(--shadow);
-      transition: transform .15s ease, border-color .15s ease;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
     }
-    .link:hover { transform: translateY(-2px); border-color: var(--muted); }
-    .link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .link.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
-    .link svg { width: 22px; height: 22px; flex: none; }
-    .link .label { flex: 1; }
-    .link .title { display: block; font-weight: 500; font-size: 16px; }
-    .link .sub { display: block; font-size: 13px; opacity: .7; margin-top: 2px; }
-    .link .arrow { opacity: .5; font-size: 18px; }
+    .link:hover { transform: translateY(-2px); background: var(--surface-hover); border-color: #3a342e; }
+    .link:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+    .link svg { width: 22px; height: 22px; flex: none; color: var(--amber); }
+    .link .label { flex: 1; min-width: 0; }
+    .link .title { display: block; font-weight: 600; font-size: 16px; }
+    .link .sub { display: block; font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .link .arrow { color: var(--muted); font-size: 18px; }
 
-    footer { margin-top: 40px; font-size: 12px; color: var(--muted); }
+    /* Offres principales */
+    .link.offer { flex-direction: column; align-items: stretch; gap: 10px; padding: 20px; border-color: #3a2a1c; background: linear-gradient(160deg, #1d1712, var(--surface)); }
+    .link.offer .head { display: flex; align-items: center; gap: 12px; }
+    .link.offer .title { font-family: "Cormorant Garamond", Georgia, serif; font-size: 24px; font-weight: 600; }
+    .link.offer .sub { font-size: 14px; color: #c9bfb3; margin-top: 0; }
+    .link.offer .cta {
+      margin-top: 4px; align-self: flex-start;
+      padding: 9px 14px; border-radius: 999px;
+      background: var(--amber); color: var(--on-amber);
+      font-size: 14px; font-weight: 600;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tags span { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: var(--amber-soft); color: #f0b77f; }
+
+    footer { margin-top: 40px; font-size: 12px; color: var(--muted); text-align: center; }
   </style>
 </head>
 <body>
   <main>
-    <!-- ✏️ Photo de profil : déposez votre photo dans images/profil.jpg.
-         Tant qu'elle n'existe pas, vos initiales s'affichent à la place. -->
-    <div class="avatar">
-      <img src="images/profil.jpg" alt="Photo de profil" onerror="this.remove()">
-      <span aria-hidden="true">N</span>
-    </div>
+    <div class="avatar"><img src="images/profil.jpg" alt="Nafuu, photographe"></div>
+    <h1>Nafuu</h1>
+    <p class="handle">@nafuu.raw</p>
+    <p class="tagline">L'esthétique du cinéma appliquée à la photo</p>
+    <p class="meta">Objectif anamorphique · Agen &amp; alentours</p>
 
-    <!-- ✏️ Votre nom et une courte présentation -->
-    <h1>nafuu.raw</h1>
-    <p class="bio">Photographe · Portrait, événements &amp; nature</p>
-
-    <nav aria-label="Liens">
-      <!-- ✏️ Lien 1 : votre portfolio (remplacez l'adresse dans href="...") -->
-      <a class="link primary" href="https://votre-portfolio.com" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
-        <span class="label"><span class="title">Portfolio</span><span class="sub">Découvrir mon travail</span></span>
-        <span class="arrow" aria-hidden="true">→</span>
+    <h2>Réserver</h2>
+    <nav aria-label="Réserver">
+      <!-- Offre 1 : shootings privés (le bouton ouvre une conversation Instagram) -->
+      <a class="link offer" href="https://ig.me/m/nafuu.raw" target="_blank" rel="noopener">
+        <span class="head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+          <span class="title">Shooting privé</span>
+        </span>
+        <span class="sub">Une séance détendue, pensée comme une scène de film. Tirage photo inclus.</span>
+        <span class="tags"><span>Portrait</span><span>Couple</span><span>Véhicule</span><span>Animaux</span></span>
+        <span class="cta">Réserver ma séance →</span>
       </a>
 
-      <!-- ✏️ Lien 2 : Instagram -->
+      <!-- Offre 2 : mariages & événements -->
+      <a class="link offer" href="https://ig.me/m/nafuu.raw" target="_blank" rel="noopener">
+        <span class="head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/><path d="M10 4l2 3 2-3"/></svg>
+          <span class="title">Mariage &amp; événement</span>
+        </span>
+        <span class="sub">Votre journée racontée comme un film : préparatifs, émotions, lumière.</span>
+        <span class="cta">Demander un devis →</span>
+      </a>
+    </nav>
+
+    <h2>Découvrir</h2>
+    <nav aria-label="Découvrir">
       <a class="link" href="https://www.instagram.com/nafuu.raw/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        <span class="label"><span class="title">Instagram</span><span class="sub">@nafuu.raw</span></span>
+        <span class="label"><span class="title">Portfolio Instagram</span><span class="sub">Portraits, mariages, sport auto, nature</span></span>
         <span class="arrow" aria-hidden="true">→</span>
       </a>
 
-      <!-- ✏️ Lien 3 : votre cagnotte (Leetchi, HelloAsso, Ko-fi, Tipeee…) -->
-      <a class="link" href="https://votre-cagnotte.com" target="_blank" rel="noopener">
+      <a class="link" href="https://pots.lydia.me/collect/pots?id=57192-moto" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
-        <span class="label"><span class="title">Soutenir mon projet</span><span class="sub">Participer à la cagnotte</span></span>
+        <span class="label"><span class="title">Soutenir mon projet</span><span class="sub">Participer à la cagnotte Lydia</span></span>
         <span class="arrow" aria-hidden="true">→</span>
       </a>
     </nav>
 
-    <footer>© <span id="year"></span> nafuu.raw</footer>
+    <footer>© <span id="year"></span> Nafuu · nafuu.raw — Agen</footer>
   </main>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>

@@ -1,24 +1,27 @@
-# Photography — page de liens
+# nafuu.raw — page de liens
 
-Page « linktree » de mon activité de photographe : une seule page qui regroupe
-mon **portfolio**, mon **Instagram** et ma **cagnotte**.
+Page « linktree » de **Nafuu**, photographe à Agen.
+*L'esthétique du cinéma appliquée à la photo.*
 
-## Personnaliser la page
+La page met en avant les deux offres qui rapportent le plus :
 
-Tout se passe dans `index.html`. Les endroits à modifier sont signalés par ✏️ :
+1. **Shooting privé** : portrait, couple, véhicule, animaux
+2. **Mariage & événement**
 
-| Quoi | Où |
+Elle propose ensuite le portfolio Instagram et la cagnotte Lydia.
+Les boutons de réservation ouvrent une conversation Instagram avec @nafuu.raw.
+
+## Modifier la page
+
+Tout est dans `index.html`, et on peut le modifier directement sur GitHub :
+ouvrez le fichier, cliquez sur le crayon ✏️, puis sur **Commit changes**.
+
+| Quoi | Où chercher dans `index.html` |
 |---|---|
-| Nom (onglet, titre, pied de page) | `nafuu.raw` |
-| Initiale (si pas de photo) | `N` |
-| Courte présentation | `<p class="bio">` |
-| Lien du portfolio | `https://votre-portfolio.com` |
-| Compte Instagram | `nafuu.raw` (2 fois) |
-| Lien de la cagnotte | `https://votre-cagnotte.com` |
-
-**Photo de profil :** ajoutez une image carrée nommée `profil.jpg` dans le dossier `images/`.
-
-On peut tout modifier directement sur GitHub : ouvrez le fichier, cliquez sur le crayon ✏️, puis sur **Commit changes**.
+| Texte d'une offre | `<!-- Offre 1 …` et `<!-- Offre 2 …` |
+| Lien de réservation | `https://ig.me/m/nafuu.raw` (2 fois) |
+| Lien de la cagnotte | `https://pots.lydia.me/…` |
+| Photo de profil | remplacez le fichier `images/profil.jpg` (image carrée) |
 
 ## Mettre la page en ligne (gratuit, avec GitHub Pages)
 
@@ -28,6 +31,6 @@ On peut tout modifier directement sur GitHub : ouvrez le fichier, cliquez sur le
 4. Après une ou deux minutes, la page est disponible à l'adresse
    `https://nafuu973.github.io/photography/`.
 
-Collez cette adresse dans la bio de votre Instagram.
+Collez cette adresse dans la bio Instagram, à la place du lien WhatsApp ou à côté.
 
 > GitHub Pages n'est gratuit que pour les dépôts **publics** (sauf avec un abonnement GitHub Pro).
