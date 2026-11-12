@@ -1,0 +1,24 @@
+# Secrets et configuration locale
+.env
+.env.*
+.dev.vars
+*.key
+*.pem
+
+# Node
+node_modules/
+
+# Documents clients : ne jamais versionner un devis ou un contrat signé
+*.pdf
+
+# Photos sources brutes
+*.cr2
+*.cr3
+*.dng
+*.arw
+*.nef
+*.raw
+
+# Système
+.DS_Store
+Thumbs.db

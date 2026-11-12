@@ -3,84 +3,117 @@
 Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
-🔗 **Adresse publique :** https://nafuu973.github.io/PHOTOGRAPHY/
+Site 100 % statique hébergé sur GitHub Pages : HTML, CSS, un script de 15 lignes.
+Aucune dépendance, aucun traceur, aucune ressource externe, aucun cookie.
 
-La page met en avant les offres qui rapportent le plus : **mariage & événement**,
-**shooting privé** et **carte cadeau**. Chaque bouton ouvre WhatsApp avec un
-message pré-rempli. Viennent ensuite le portfolio Instagram et les albums des
-événements bénévoles (participation libre sur Lydia).
-
-## Organisation du dépôt
+## Organisation
 
 ```
-index.html              La page de liens
-assets/
-  css/fonts.css         Déclaration des polices
-  css/style.css         Mise en forme (sections numérotées)
-  js/main.js            Barre « Demander mon devis » qui apparaît au défilement
-  fonts/                Polices auto-hébergées + licences (SIL OFL)
-  img/                  Photo de profil, favicon, image de partage (1200×630)
-  qr/                   QR codes et carte prête à publier
-documents/
-  devis.html            Modèle de devis (calcul automatique)
-  contrat-mariage.html  Modèle de contrat de mariage
-  doc.css, doc.js, devis.js
-tools/
-  build_links.py        Génère les liens WhatsApp pré-remplis
-  partage.html          Source de l'image de partage
-  carte-qr.html         Source de la carte QR
-robots.txt              Empêche Google d'indexer documents/ et tools/
+public/                 SEUL dossier publié sur Internet
+  index.html            La page de liens
+  404.html              Page d'erreur
+  robots.txt, sitemap.xml
+  assets/
+    css/                fonts.css, style.css
+    js/main.js          Barre « Demander mon devis » au défilement
+    fonts/              Polices auto-hébergées + licences (SIL OFL)
+    img/                Photo de profil, favicon, image de partage
+tools/check.py          Contrôle automatique avant publication
+.github/
+  workflows/pages.yml   Vérifie, puis publie public/ sur GitHub Pages
+  dependabot.yml        Met à jour les actions GitHub
+  CODEOWNERS            Propriétaire des fichiers sensibles
+  rulesets/main.json    Protection de la branche main (à importer, voir plus bas)
+SECURITY.md, LICENSE
 ```
+
+Règle : tout ce qui est dans `public/` est visible par tout le monde, et ce dépôt est public.
+Les devis, contrats, QR, exports et outils sont dans un dépôt **privé** séparé : `nafuu-studio`.
+
+## Avant chaque publication
+
+```
+python3 -I tools/check.py
+```
+
+GitHub Actions l'exécute aussi à chaque modification et **bloque la publication** s'il échoue. Il vérifie :
+- `public/` : aucun script ou style inline (bloqué par la CSP), références valides, aucune ressource externe chargée,
+  liens externes limités à WhatsApp, Instagram et Lydia, aucun fichier sensible (devis, contrat, PDF, clé, RAW)
+  ou supérieur à 1,5 Mo, adresse du site identique partout ;
+- workflows : actions épinglées par SHA, permissions déclarées, pas de `pull_request_target`,
+  pas d'injection via `github.event`, identifiants de checkout non conservés.
 
 ## Modifier la page
 
-On peut tout modifier directement sur GitHub : ouvrez le fichier, cliquez sur le
-crayon ✏️, puis sur **Commit changes**.
-
 | Quoi | Où |
 |---|---|
-| Textes des offres | `index.html`, section `<!-- Offres -->` |
-| Messages WhatsApp pré-remplis | modifier `tools/build_links.py`, le lancer, coller les liens dans `index.html` |
-| Galeries Google Photos | `index.html`, décommenter le bloc `Galeries` |
-| Couleurs, tailles | `assets/css/style.css`, section 1 « Variables » |
-| Photo de profil | remplacer `assets/img/profil.jpg` (carrée, 480×480) |
+| Textes des offres | `public/index.html`, section `<!-- Offres -->` |
+| Liens WhatsApp pré-remplis | `tools/build_links.py` dans `nafuu-studio`, puis coller dans `index.html` |
+| Galeries | `public/index.html`, bloc `Galeries` à décommenter |
+| Couleurs, tailles | `public/assets/css/style.css`, section 1 « Variables » |
+| Photo de profil | `public/assets/img/profil.jpg` (carrée, 480×480) |
 
-## Sécurité
+Toute nouvelle ressource externe (police, script, image distante) est volontairement refusée : l'héberger dans `public/assets/`.
+Ne jamais assouplir la CSP (`unsafe-inline`, `*`) pour « faire marcher » un ajout : corriger l'ajout.
 
-- **Aucun script externe, aucun traceur, aucune police Google** : tout est servi
-  depuis le site lui-même (aucune donnée de visiteur envoyée à des tiers).
-- **Content-Security-Policy** stricte : seuls les fichiers du site peuvent être
-  chargés ; aucun code inline, aucun formulaire.
-- La page fonctionne entièrement sans JavaScript. Le seul script (`main.js`)
-  ne fait qu'afficher la barre de réservation au défilement.
-- Liens externes en `rel="noopener noreferrer"`.
-- Les photos publiées sont débarrassées de leurs métadonnées (EXIF, GPS).
-- HTTPS forcé par GitHub Pages (cocher **Enforce HTTPS** dans Settings → Pages).
+Flux de travail : créer une branche, ouvrir une pull request, attendre le contrôle vert, fusionner.
+La fusion dans `main` publie le site.
 
-## QR code
+## Mise en ligne (GitHub Pages par GitHub Actions)
 
-| Fichier | Usage |
-|---|---|
-| `assets/qr/carte-qr.png` | Carte 1080×1350 prête à publier (story, post, impression) |
-| `assets/qr/qr-nafuu-logo.png` | QR seul avec l'œil au centre |
-| `assets/qr/qr-nafuu.png` / `.svg` | QR simple (le SVG s'imprime à n'importe quelle taille) |
+1. Settings → **Pages** → Build and deployment → Source : **GitHub Actions**. L'ancien site reste en ligne jusqu'au premier déploiement.
+2. Fusionner la pull request. Onglet **Actions** : les trois étapes `verifier`, `construire`, `deployer` doivent passer.
+3. Ouvrir l'adresse publique et vérifier la page.
 
-Le QR pointe vers https://nafuu973.github.io/PHOTOGRAPHY/ (correction d'erreur
-maximale : il reste lisible même abîmé ou imprimé petit, 2 cm minimum).
+## Réglages GitHub à activer (à faire une fois)
 
-## Mise en ligne (GitHub Pages)
+Ces réglages ne sont pas dans le code : les faire dans l'interface GitHub.
 
-1. Le dépôt doit être **public** : Settings → General → Danger Zone → Change visibility.
-2. Settings → **Pages** → Source : **Deploy from a branch**.
-3. Branche : celle qui contient `index.html`, dossier `/ (root)` → **Save**.
-4. Cocher **Enforce HTTPS**. La page est en ligne en 1 à 2 minutes.
+1. **Compte** : Settings → Password and authentication → activer la double authentification (clé d'accès ou application),
+   garder les codes de secours hors ligne. Vérifier Settings → Applications et SSH keys : supprimer ce qui n'est plus utilisé.
+2. **Branche par défaut** : Settings → General → Default branch → renommer en `main`.
+3. **Ruleset** : Settings → Rules → Rulesets → New ruleset → **Import a ruleset** → `.github/rulesets/main.json`.
+   Effet : pas de suppression ni de réécriture de `main`, passage obligatoire par pull request et par le contrôle `verifier`.
+4. **Sécurité du dépôt** : Settings → Advanced Security (ou Code security) : activer *Private vulnerability reporting*,
+   *Dependabot alerts*, *Dependabot security updates*, *Secret scanning* et *Push protection*.
+5. **Actions** : Settings → Actions → General :
+   - Actions permissions : *Allow actions created by GitHub* ;
+   - cocher *Require actions to be pinned to a full-length commit SHA* ;
+   - Workflow permissions : *Read repository contents and packages permissions*, décocher *Allow GitHub Actions to create and approve pull requests* ;
+   - Fork pull request workflows : exiger l'approbation pour tous les contributeurs externes.
+6. **Pages** : cocher *Enforce HTTPS* si l'option est proposée.
+7. **Nom de domaine** (quand il sera acheté) : vérifier le domaine au niveau du **profil** (Settings du compte → Pages → Add a domain)
+   avec l'enregistrement TXT demandé, et le **laisser en place**. Jamais d'enregistrement DNS générique `*.domaine`.
+   Sans cela, un tiers peut reprendre le domaine si le site est supprimé ou désactivé.
 
-## Documents commerciaux
+## Changer d'adresse (nom de domaine)
 
-Ouvrez `documents/devis.html` ou `documents/contrat-mariage.html` dans un
-navigateur, remplissez les zones orangées, puis **Imprimer / Enregistrer en PDF**.
-Rien n'est enregistré ni envoyé : gardez le PDF de chaque devis et contrat signé.
+L'adresse publique apparaît dans `index.html` (canonical, og:url, og:image, JSON-LD), `robots.txt`, `sitemap.xml`
+et `404.html` (chemin `/PHOTOGRAPHY/`). Le contrôle signale toute incohérence.
 
-> ⚠️ Ces modèles ne remplacent pas un conseil juridique : faites relire le contrat
-> une fois (CCI, juriste). Adhérez à un **médiateur de la consommation**
-> (obligatoire pour vendre à des particuliers) et indiquez-le dans l'article 11.
+```
+grep -rn "nafuu973.github.io\|/PHOTOGRAPHY/" public
+```
+
+Remplacer partout, puis régénérer les QR codes dans `nafuu-studio` avant toute impression.
+Ne pas imprimer de QR avant d'avoir fixé le nom de domaine définitif.
+
+## Limites connues
+
+- GitHub Pages ne permet pas de définir des en-têtes HTTP. La CSP est posée par balise `meta`, qui ignore `frame-ancestors` :
+  la page peut être affichée dans une iframe par un tiers (clickjacking). Risque faible : pas de connexion, pas d'action sensible.
+  Seul un autre hébergeur (ou un proxy) permettrait un vrai en-tête `X-Frame-Options` / `frame-ancestors`.
+- Le numéro de téléphone et l'e-mail de la page sont lisibles par des robots. Utiliser des coordonnées dédiées à l'activité.
+- L'historique du dépôt reste public même après suppression d'un fichier. Ne jamais y déposer un secret, un devis ou un contrat :
+  si cela arrive, changer le secret, puis seulement nettoyer l'historique.
+- Mentions légales : à ajouter dès que le statut et le SIRET sont connus (obligation pour un site professionnel en France).
+
+## Code généré par IA : garde-fous appliqués ici
+
+Ce dépôt est rédigé avec une IA. Les études sur le code généré par IA montrent surtout des contrôles d'accès absents,
+des secrets exposés, des dépendances inventées et des affirmations non vérifiées. Réponse retenue :
+- **Zéro dépendance** : rien à installer, donc aucun paquet inventé ou piégé ;
+- **Zéro secret** : le dépôt n'en contient pas (historique analysé), `.gitignore` et la protection au push les bloquent ;
+- **Chaque affirmation est vérifiée par machine** (`tools/check.py`), pas seulement écrite dans ce README ;
+- **Petites modifications relues** : une pull request, un contrôle vert, une relecture humaine avant fusion ;
+- **Pas d'assouplissement silencieux** de la sécurité pour corriger un bug.
