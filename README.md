@@ -3,7 +3,7 @@
 Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
-Site 100 % statique hébergé sur GitHub Pages : HTML, CSS, un script de 15 lignes.
+Site 100 % statique hébergé sur GitHub Pages : HTML, CSS, un script d'une vingtaine de lignes.
 Aucune dépendance, aucun traceur, aucune ressource externe, aucun cookie.
 
 ## Organisation
@@ -15,9 +15,10 @@ public/                 SEUL dossier publié sur Internet
   robots.txt, sitemap.xml
   assets/
     css/                fonts.css, style.css
-    js/main.js          Barre « Demander mon devis » au défilement
-    fonts/              Polices auto-hébergées + licences (SIL OFL)
-    img/                Photo de profil, favicon, image de partage
+    js/main.js          Barre « Demander un devis » fixe sur téléphone
+    fonts/              Jost et IBM Plex Mono auto-hébergées + licences (SIL OFL)
+    img/                Favicon, image de partage
+    img/plans/          Photos 2:1, en 1000 et 2000 px de large, sans métadonnées
 tools/check.py          Contrôle automatique avant publication
 .github/
   workflows/pages.yml   Vérifie, puis publie public/ sur GitHub Pages
@@ -47,11 +48,11 @@ GitHub Actions l'exécute aussi à chaque modification et **bloque la publicatio
 
 | Quoi | Où |
 |---|---|
-| Textes des offres | `public/index.html`, section `<!-- Offres -->` |
+| Textes et prix | `public/index.html`, section `<!-- Prestations -->` (prix indicatifs, « dès ») |
 | Liens WhatsApp pré-remplis | `tools/build_links.py` dans `nafuu-studio`, puis coller dans `index.html` |
-| Galeries | `public/index.html`, bloc `Galeries` à décommenter |
+| Photos | `public/assets/img/plans/` : `nom-1000.jpg` et `nom-2000.jpg`, format 2:1, EXIF retirés ; texte alternatif et légende dans `index.html` |
 | Couleurs, tailles | `public/assets/css/style.css`, section 1 « Variables » |
-| Photo de profil | `public/assets/img/profil.jpg` (carrée, 480×480) |
+| Image de partage | `public/assets/img/partage.jpg` (1200×630) |
 
 Toute nouvelle ressource externe (police, script, image distante) est volontairement refusée : l'héberger dans `public/assets/`.
 Ne jamais assouplir la CSP (`unsafe-inline`, `*`) pour « faire marcher » un ajout : corriger l'ajout.
