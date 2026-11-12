@@ -1,0 +1,63 @@
+name: Vérifier et publier le site
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Aucune permission par défaut : chaque job déclare uniquement ce dont il a besoin.
+permissions: {}
+
+# Une exécution par branche ; une vérification de PR périmée est annulée, jamais un déploiement.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  verifier:
+    name: verifier
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Contrôler public/ et les workflows
+        run: python3 -I tools/check.py
+
+  construire:
+    name: construire
+    needs: verifier
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: public
+
+  deployer:
+    name: deployer
+    needs: construire
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pages: write # publier l'artefact sur GitHub Pages
+      id-token: write # jeton OIDC exigé par actions/deploy-pages pour authentifier le déploiement
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

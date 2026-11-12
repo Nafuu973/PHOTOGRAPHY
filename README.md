@@ -3,7 +3,8 @@
 Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
-Site 100 % statique : HTML, CSS, un script de 15 lignes. Aucun traceur, aucune ressource externe.
+Site 100 % statique hébergé sur GitHub Pages : HTML, CSS, un script de 15 lignes.
+Aucune dépendance, aucun traceur, aucune ressource externe, aucun cookie.
 
 ## Organisation
 
@@ -11,89 +12,108 @@ Site 100 % statique : HTML, CSS, un script de 15 lignes. Aucun traceur, aucune r
 public/                 SEUL dossier publié sur Internet
   index.html            La page de liens
   404.html              Page d'erreur
-  _headers              En-têtes de sécurité et de cache (Cloudflare)
   robots.txt, sitemap.xml
   assets/
     css/                fonts.css, style.css
     js/main.js          Barre « Demander mon devis » au défilement
     fonts/              Polices auto-hébergées + licences (SIL OFL)
     img/                Photo de profil, favicon, image de partage
-
-studio/                 Jamais publié : outils et documents internes
-  documents/            Devis et contrat de mariage (ouvrir en local)
-  tools/                Générateurs (liens WhatsApp, visuels) et check.py
-  instagram/            Visuels du post épinglé (exports)
-  qr/                   QR codes et carte prête à publier
-  google-business/      Logo et couverture de la fiche Google
-
-wrangler.jsonc          Configuration du déploiement Cloudflare
+tools/check.py          Contrôle automatique avant publication
+.github/
+  workflows/pages.yml   Vérifie, puis publie public/ sur GitHub Pages
+  dependabot.yml        Met à jour les actions GitHub
+  CODEOWNERS            Propriétaire des fichiers sensibles
+  rulesets/main.json    Protection de la branche main (à importer, voir plus bas)
+SECURITY.md, LICENSE
 ```
 
-Règle : tout ce qui est dans `public/` est visible par tout le monde. Tout le reste ne l'est pas.
+Règle : tout ce qui est dans `public/` est visible par tout le monde, et ce dépôt est public.
+Les devis, contrats, QR, exports et outils sont dans un dépôt **privé** séparé : `nafuu-studio`.
 
 ## Avant chaque publication
 
 ```
-python3 studio/tools/check.py
+python3 -I tools/check.py
 ```
 
-Le script échoue si `public/` contient un script ou un style inline (bloqué par la CSP), une référence cassée,
-une ressource externe, un fichier sensible (devis, contrat, PDF, clé, RAW) ou si `_headers` est incomplet.
+GitHub Actions l'exécute aussi à chaque modification et **bloque la publication** s'il échoue. Il vérifie :
+- `public/` : aucun script ou style inline (bloqué par la CSP), références valides, aucune ressource externe chargée,
+  liens externes limités à WhatsApp, Instagram et Lydia, aucun fichier sensible (devis, contrat, PDF, clé, RAW)
+  ou supérieur à 1,5 Mo, adresse du site identique partout ;
+- workflows : actions épinglées par SHA, permissions déclarées, pas de `pull_request_target`,
+  pas d'injection via `github.event`, identifiants de checkout non conservés.
 
 ## Modifier la page
 
 | Quoi | Où |
 |---|---|
 | Textes des offres | `public/index.html`, section `<!-- Offres -->` |
-| Messages WhatsApp pré-remplis | `studio/tools/build_links.py` : le lancer, coller les liens dans `index.html` |
+| Liens WhatsApp pré-remplis | `tools/build_links.py` dans `nafuu-studio`, puis coller dans `index.html` |
 | Galeries | `public/index.html`, bloc `Galeries` à décommenter |
 | Couleurs, tailles | `public/assets/css/style.css`, section 1 « Variables » |
 | Photo de profil | `public/assets/img/profil.jpg` (carrée, 480×480) |
 
-Aucune modification de `public/_headers` ne doit affaiblir la CSP sans raison. Toute nouvelle ressource externe
-(police, script, image distante) est volontairement refusée : hébergez-la dans `public/assets/`.
+Toute nouvelle ressource externe (police, script, image distante) est volontairement refusée : l'héberger dans `public/assets/`.
+Ne jamais assouplir la CSP (`unsafe-inline`, `*`) pour « faire marcher » un ajout : corriger l'ajout.
 
-## Déploiement sur Cloudflare (Workers, fichiers statiques)
+Flux de travail : créer une branche, ouvrir une pull request, attendre le contrôle vert, fusionner.
+La fusion dans `main` publie le site.
 
-> Ordre impératif : ne fusionner cette structure dans la branche servie par GitHub Pages qu'**après** la mise en
-> ligne sur Cloudflare. GitHub Pages ne sert que la racine du dépôt ou `/docs` : avec `public/`, l'ancienne adresse tomberait en 404.
+## Mise en ligne (GitHub Pages par GitHub Actions)
 
-1. Dashboard Cloudflare → **Workers & Pages** → **Create** → **Import a repository** → ce dépôt.
-2. Branche de production : `main`. Commande de build : vide. Commande de déploiement : `npx wrangler deploy`.
-3. Le nom du Worker doit correspondre au champ `name` de `wrangler.jsonc` (`nafuu-linkpage`).
-4. Tester l'adresse `*.workers.dev`, puis attacher le nom de domaine (Settings → Domains & Routes).
-5. Seulement ensuite : désactiver GitHub Pages et, si souhaité, passer le dépôt en privé.
+1. Settings → **Pages** → Build and deployment → Source : **GitHub Actions**. L'ancien site reste en ligne jusqu'au premier déploiement.
+2. Fusionner la pull request. Onglet **Actions** : les trois étapes `verifier`, `construire`, `deployer` doivent passer.
+3. Ouvrir l'adresse publique et vérifier la page.
 
-Cloudflare lit un dépôt privé : `studio/` (contrat, devis, outils) n'est alors plus exposé sur GitHub non plus.
+## Réglages GitHub à activer (à faire une fois)
+
+Ces réglages ne sont pas dans le code : les faire dans l'interface GitHub.
+
+1. **Compte** : Settings → Password and authentication → activer la double authentification (clé d'accès ou application),
+   garder les codes de secours hors ligne. Vérifier Settings → Applications et SSH keys : supprimer ce qui n'est plus utilisé.
+2. **Branche par défaut** : Settings → General → Default branch → renommer en `main`.
+3. **Ruleset** : Settings → Rules → Rulesets → New ruleset → **Import a ruleset** → `.github/rulesets/main.json`.
+   Effet : pas de suppression ni de réécriture de `main`, passage obligatoire par pull request et par le contrôle `verifier`.
+4. **Sécurité du dépôt** : Settings → Advanced Security (ou Code security) : activer *Private vulnerability reporting*,
+   *Dependabot alerts*, *Dependabot security updates*, *Secret scanning* et *Push protection*.
+5. **Actions** : Settings → Actions → General :
+   - Actions permissions : *Allow actions created by GitHub* ;
+   - cocher *Require actions to be pinned to a full-length commit SHA* ;
+   - Workflow permissions : *Read repository contents and packages permissions*, décocher *Allow GitHub Actions to create and approve pull requests* ;
+   - Fork pull request workflows : exiger l'approbation pour tous les contributeurs externes.
+6. **Pages** : cocher *Enforce HTTPS* si l'option est proposée.
+7. **Nom de domaine** (quand il sera acheté) : vérifier le domaine au niveau du **profil** (Settings du compte → Pages → Add a domain)
+   avec l'enregistrement TXT demandé, et le **laisser en place**. Jamais d'enregistrement DNS générique `*.domaine`.
+   Sans cela, un tiers peut reprendre le domaine si le site est supprimé ou désactivé.
 
 ## Changer d'adresse (nom de domaine)
 
-L'adresse publique apparaît à 5 endroits : `index.html` (canonical, og:url, og:image, JSON-LD),
-`robots.txt`, `sitemap.xml`, `studio/tools/carte-qr.html` (texte imprimé) et les QR codes de `studio/qr/`.
+L'adresse publique apparaît dans `index.html` (canonical, og:url, og:image, JSON-LD), `robots.txt`, `sitemap.xml`
+et `404.html` (chemin `/PHOTOGRAPHY/`). Le contrôle signale toute incohérence.
 
 ```
-grep -rn "nafuu973.github.io/PHOTOGRAPHY" public studio
+grep -rn "nafuu973.github.io\|/PHOTOGRAPHY/" public
 ```
 
-Remplacer partout, puis régénérer les QR codes et exporter à nouveau `studio/qr/carte-qr.png`.
+Remplacer partout, puis régénérer les QR codes dans `nafuu-studio` avant toute impression.
 Ne pas imprimer de QR avant d'avoir fixé le nom de domaine définitif.
 
-## Sécurité
+## Limites connues
 
-- CSP stricte (`default-src 'none'`), doublée par `_headers` : `frame-ancestors 'none'` (anti-clickjacking),
-  HSTS, `nosniff`, Permissions-Policy fermée, COOP.
-- Aucun formulaire, aucun cookie, aucune donnée de visiteur envoyée à un tiers.
-- Liens externes en `rel="noopener noreferrer"`.
-- `.gitignore` bloque `.env`, clés, PDF clients et fichiers RAW.
-- Activer la double authentification sur GitHub et sur Cloudflare.
-- Vérifier les photos publiées : `exiftool public/assets/img/*.jpg` ne doit montrer ni GPS ni numéro de série.
-- Coordonnées publiques : le numéro et l'e-mail de la page sont lisibles par les robots. Utiliser des coordonnées dédiées à l'activité.
+- GitHub Pages ne permet pas de définir des en-têtes HTTP. La CSP est posée par balise `meta`, qui ignore `frame-ancestors` :
+  la page peut être affichée dans une iframe par un tiers (clickjacking). Risque faible : pas de connexion, pas d'action sensible.
+  Seul un autre hébergeur (ou un proxy) permettrait un vrai en-tête `X-Frame-Options` / `frame-ancestors`.
+- Le numéro de téléphone et l'e-mail de la page sont lisibles par des robots. Utiliser des coordonnées dédiées à l'activité.
+- L'historique du dépôt reste public même après suppression d'un fichier. Ne jamais y déposer un secret, un devis ou un contrat :
+  si cela arrive, changer le secret, puis seulement nettoyer l'historique.
+- Mentions légales : à ajouter dès que le statut et le SIRET sont connus (obligation pour un site professionnel en France).
 
-## Documents commerciaux
+## Code généré par IA : garde-fous appliqués ici
 
-Ouvrir `studio/documents/devis.html` ou `contrat-mariage.html` dans un navigateur, remplir les zones orangées,
-puis **Imprimer / Enregistrer en PDF**. Rien n'est enregistré ni envoyé. Conserver chaque PDF signé hors de ce dépôt.
-
-> Ces modèles ne remplacent pas un conseil juridique : faire relire le contrat une fois (CCI, juriste).
-> Adhérer à un médiateur de la consommation (obligatoire pour vendre à des particuliers) et l'indiquer à l'article 11.
-> La clause de responsabilité limitée (article 5) est à faire valider : face à un consommateur, elle peut être jugée abusive.
+Ce dépôt est rédigé avec une IA. Les études sur le code généré par IA montrent surtout des contrôles d'accès absents,
+des secrets exposés, des dépendances inventées et des affirmations non vérifiées. Réponse retenue :
+- **Zéro dépendance** : rien à installer, donc aucun paquet inventé ou piégé ;
+- **Zéro secret** : le dépôt n'en contient pas (historique analysé), `.gitignore` et la protection au push les bloquent ;
+- **Chaque affirmation est vérifiée par machine** (`tools/check.py`), pas seulement écrite dans ce README ;
+- **Petites modifications relues** : une pull request, un contrôle vert, une relecture humaine avant fusion ;
+- **Pas d'assouplissement silencieux** de la sécurité pour corriger un bug.

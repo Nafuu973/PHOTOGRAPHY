@@ -5,8 +5,7 @@
 *.key
 *.pem
 
-# Cloudflare / Node
-.wrangler/
+# Node
 node_modules/
 
 # Documents clients : ne jamais versionner un devis ou un contrat signé
