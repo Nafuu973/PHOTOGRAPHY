@@ -95,11 +95,24 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color:
 }
 .btn-line:hover { background: var(--amber); color: var(--on-amber); }
 
-/* 5. Plans ---------------------------------------------------------------- */
-.plans { margin-top: 40px; display: grid; grid-template-columns: 1fr; gap: 56px 24px; padding: 0; list-style: none; }
-@media (min-width: 760px) {
-  .plans { grid-template-columns: 1fr 1fr; }
-  .plans .wide { grid-column: 1 / -1; }
+/* 5. Rushes : bande 35 mm verticale --------------------------------------- */
+.strip {
+  --hole: clamp(10px, 1.6vw, 17px);
+  --hole-x: clamp(9px, 2vw, 20px);
+  position: relative; max-width: 960px; margin: 48px auto 0;
+  padding: 22px clamp(30px, 6vw, 60px) 34px; list-style: none;
+  display: flex; flex-direction: column; gap: 30px;
+  background: #15110d;
+}
+.strip::before, .strip::after {          /* perforations */
+  content: ""; position: absolute; top: 0; bottom: 0; width: var(--hole);
+  background: repeating-linear-gradient(180deg, transparent 0 11px, var(--bg) 11px 25px, transparent 25px 36px);
+}
+.strip::before { left: var(--hole-x); }
+.strip::after { right: var(--hole-x); }
+.edge {                                   /* marquages de bord */
+  margin-bottom: 8px; display: flex; justify-content: space-between;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--amber);
 }
 
 /* 6. Prestations ---------------------------------------------------------- */
