@@ -3,84 +3,97 @@
 Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
-🔗 **Adresse publique :** https://nafuu973.github.io/PHOTOGRAPHY/
+Site 100 % statique : HTML, CSS, un script de 15 lignes. Aucun traceur, aucune ressource externe.
 
-La page met en avant les offres qui rapportent le plus : **mariage & événement**,
-**shooting privé** et **carte cadeau**. Chaque bouton ouvre WhatsApp avec un
-message pré-rempli. Viennent ensuite le portfolio Instagram et les albums des
-événements bénévoles (participation libre sur Lydia).
-
-## Organisation du dépôt
+## Organisation
 
 ```
-index.html              La page de liens
-assets/
-  css/fonts.css         Déclaration des polices
-  css/style.css         Mise en forme (sections numérotées)
-  js/main.js            Barre « Demander mon devis » qui apparaît au défilement
-  fonts/                Polices auto-hébergées + licences (SIL OFL)
-  img/                  Photo de profil, favicon, image de partage (1200×630)
+public/                 SEUL dossier publié sur Internet
+  index.html            La page de liens
+  404.html              Page d'erreur
+  _headers              En-têtes de sécurité et de cache (Cloudflare)
+  robots.txt, sitemap.xml
+  assets/
+    css/                fonts.css, style.css
+    js/main.js          Barre « Demander mon devis » au défilement
+    fonts/              Polices auto-hébergées + licences (SIL OFL)
+    img/                Photo de profil, favicon, image de partage
+
+studio/                 Jamais publié : outils et documents internes
+  documents/            Devis et contrat de mariage (ouvrir en local)
+  tools/                Générateurs (liens WhatsApp, visuels) et check.py
+  instagram/            Visuels du post épinglé (exports)
   qr/                   QR codes et carte prête à publier
-documents/
-  devis.html            Modèle de devis (calcul automatique)
-  contrat-mariage.html  Modèle de contrat de mariage
-  doc.css, doc.js, devis.js
-tools/
-  build_links.py        Génère les liens WhatsApp pré-remplis
-  partage.html          Source de l'image de partage
-  carte-qr.html         Source de la carte QR
-robots.txt              Empêche Google d'indexer documents/ et tools/
+  google-business/      Logo et couverture de la fiche Google
+
+wrangler.jsonc          Configuration du déploiement Cloudflare
 ```
+
+Règle : tout ce qui est dans `public/` est visible par tout le monde. Tout le reste ne l'est pas.
+
+## Avant chaque publication
+
+```
+python3 studio/tools/check.py
+```
+
+Le script échoue si `public/` contient un script ou un style inline (bloqué par la CSP), une référence cassée,
+une ressource externe, un fichier sensible (devis, contrat, PDF, clé, RAW) ou si `_headers` est incomplet.
 
 ## Modifier la page
 
-On peut tout modifier directement sur GitHub : ouvrez le fichier, cliquez sur le
-crayon ✏️, puis sur **Commit changes**.
-
 | Quoi | Où |
 |---|---|
-| Textes des offres | `index.html`, section `<!-- Offres -->` |
-| Messages WhatsApp pré-remplis | modifier `tools/build_links.py`, le lancer, coller les liens dans `index.html` |
-| Galeries Google Photos | `index.html`, décommenter le bloc `Galeries` |
-| Couleurs, tailles | `assets/css/style.css`, section 1 « Variables » |
-| Photo de profil | remplacer `assets/img/profil.jpg` (carrée, 480×480) |
+| Textes des offres | `public/index.html`, section `<!-- Offres -->` |
+| Messages WhatsApp pré-remplis | `studio/tools/build_links.py` : le lancer, coller les liens dans `index.html` |
+| Galeries | `public/index.html`, bloc `Galeries` à décommenter |
+| Couleurs, tailles | `public/assets/css/style.css`, section 1 « Variables » |
+| Photo de profil | `public/assets/img/profil.jpg` (carrée, 480×480) |
+
+Aucune modification de `public/_headers` ne doit affaiblir la CSP sans raison. Toute nouvelle ressource externe
+(police, script, image distante) est volontairement refusée : hébergez-la dans `public/assets/`.
+
+## Déploiement sur Cloudflare (Workers, fichiers statiques)
+
+> Ordre impératif : ne fusionner cette structure dans la branche servie par GitHub Pages qu'**après** la mise en
+> ligne sur Cloudflare. GitHub Pages ne sert que la racine du dépôt ou `/docs` : avec `public/`, l'ancienne adresse tomberait en 404.
+
+1. Dashboard Cloudflare → **Workers & Pages** → **Create** → **Import a repository** → ce dépôt.
+2. Branche de production : `main`. Commande de build : vide. Commande de déploiement : `npx wrangler deploy`.
+3. Le nom du Worker doit correspondre au champ `name` de `wrangler.jsonc` (`nafuu-linkpage`).
+4. Tester l'adresse `*.workers.dev`, puis attacher le nom de domaine (Settings → Domains & Routes).
+5. Seulement ensuite : désactiver GitHub Pages et, si souhaité, passer le dépôt en privé.
+
+Cloudflare lit un dépôt privé : `studio/` (contrat, devis, outils) n'est alors plus exposé sur GitHub non plus.
+
+## Changer d'adresse (nom de domaine)
+
+L'adresse publique apparaît à 5 endroits : `index.html` (canonical, og:url, og:image, JSON-LD),
+`robots.txt`, `sitemap.xml`, `studio/tools/carte-qr.html` (texte imprimé) et les QR codes de `studio/qr/`.
+
+```
+grep -rn "nafuu973.github.io/PHOTOGRAPHY" public studio
+```
+
+Remplacer partout, puis régénérer les QR codes et exporter à nouveau `studio/qr/carte-qr.png`.
+Ne pas imprimer de QR avant d'avoir fixé le nom de domaine définitif.
 
 ## Sécurité
 
-- **Aucun script externe, aucun traceur, aucune police Google** : tout est servi
-  depuis le site lui-même (aucune donnée de visiteur envoyée à des tiers).
-- **Content-Security-Policy** stricte : seuls les fichiers du site peuvent être
-  chargés ; aucun code inline, aucun formulaire.
-- La page fonctionne entièrement sans JavaScript. Le seul script (`main.js`)
-  ne fait qu'afficher la barre de réservation au défilement.
+- CSP stricte (`default-src 'none'`), doublée par `_headers` : `frame-ancestors 'none'` (anti-clickjacking),
+  HSTS, `nosniff`, Permissions-Policy fermée, COOP.
+- Aucun formulaire, aucun cookie, aucune donnée de visiteur envoyée à un tiers.
 - Liens externes en `rel="noopener noreferrer"`.
-- Les photos publiées sont débarrassées de leurs métadonnées (EXIF, GPS).
-- HTTPS forcé par GitHub Pages (cocher **Enforce HTTPS** dans Settings → Pages).
-
-## QR code
-
-| Fichier | Usage |
-|---|---|
-| `assets/qr/carte-qr.png` | Carte 1080×1350 prête à publier (story, post, impression) |
-| `assets/qr/qr-nafuu-logo.png` | QR seul avec l'œil au centre |
-| `assets/qr/qr-nafuu.png` / `.svg` | QR simple (le SVG s'imprime à n'importe quelle taille) |
-
-Le QR pointe vers https://nafuu973.github.io/PHOTOGRAPHY/ (correction d'erreur
-maximale : il reste lisible même abîmé ou imprimé petit, 2 cm minimum).
-
-## Mise en ligne (GitHub Pages)
-
-1. Le dépôt doit être **public** : Settings → General → Danger Zone → Change visibility.
-2. Settings → **Pages** → Source : **Deploy from a branch**.
-3. Branche : celle qui contient `index.html`, dossier `/ (root)` → **Save**.
-4. Cocher **Enforce HTTPS**. La page est en ligne en 1 à 2 minutes.
+- `.gitignore` bloque `.env`, clés, PDF clients et fichiers RAW.
+- Activer la double authentification sur GitHub et sur Cloudflare.
+- Vérifier les photos publiées : `exiftool public/assets/img/*.jpg` ne doit montrer ni GPS ni numéro de série.
+- Coordonnées publiques : le numéro et l'e-mail de la page sont lisibles par les robots. Utiliser des coordonnées dédiées à l'activité.
 
 ## Documents commerciaux
 
-Ouvrez `documents/devis.html` ou `documents/contrat-mariage.html` dans un
-navigateur, remplissez les zones orangées, puis **Imprimer / Enregistrer en PDF**.
-Rien n'est enregistré ni envoyé : gardez le PDF de chaque devis et contrat signé.
+Ouvrir `studio/documents/devis.html` ou `contrat-mariage.html` dans un navigateur, remplir les zones orangées,
+puis **Imprimer / Enregistrer en PDF**. Rien n'est enregistré ni envoyé. Conserver chaque PDF signé hors de ce dépôt.
 
-> ⚠️ Ces modèles ne remplacent pas un conseil juridique : faites relire le contrat
-> une fois (CCI, juriste). Adhérez à un **médiateur de la consommation**
-> (obligatoire pour vendre à des particuliers) et indiquez-le dans l'article 11.
+> Ces modèles ne remplacent pas un conseil juridique : faire relire le contrat une fois (CCI, juriste).
+> Adhérer à un médiateur de la consommation (obligatoire pour vendre à des particuliers) et l'indiquer à l'article 11.
+> La clause de responsabilité limitée (article 5) est à faire valider : face à un consommateur, elle peut être jugée abusive.

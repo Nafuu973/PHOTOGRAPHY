@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nafuu973.github.io/PHOTOGRAPHY/sitemap.xml
