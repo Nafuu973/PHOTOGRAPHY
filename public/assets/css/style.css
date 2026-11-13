@@ -157,6 +157,13 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color:
   .credits { padding-bottom: 64px; }
 }
 
+/* Carte de contact (carte.html, ouverte par la puce NFC ou le QR code) */
+.card { min-height: 100vh; max-width: 520px; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding-top: 48px; padding-bottom: 48px; }
+.card h1 { font-weight: 300; font-size: 34px; line-height: 1.1; }
+.card-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0; list-style: none; }
+.card-links .btn-line { width: 100%; justify-content: center; }
+.card .fine { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+
 /* Page 404 */
 .lost { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
 .lost h1 { font-weight: 300; font-size: clamp(56px, 10vw, 120px); line-height: 1; }

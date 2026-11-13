@@ -87,6 +87,13 @@ Ces réglages ne sont pas dans le code : les faire dans l'interface GitHub.
    avec l'enregistrement TXT demandé, et le **laisser en place**. Jamais d'enregistrement DNS générique `*.domaine`.
    Sans cela, un tiers peut reprendre le domaine si le site est supprimé ou désactivé.
 
+## Carte de contact (NFC et QR code)
+
+`public/carte.html` ouvre la fiche `public/nafuu.vcf` (« Ajouter à mes contacts »). Page non indexée.
+Les puces NFC et les QR codes imprimés pointent vers `https://nafuu973.github.io/PHOTOGRAPHY/carte.html`.
+Après programmation d'une puce, la **verrouiller en écriture**, sinon n'importe qui peut la réécrire vers un autre site.
+Changer de domaine oblige à reprogrammer les puces et à réimprimer les QR codes.
+
 ## Changer d'adresse (nom de domaine)
 
 L'adresse publique apparaît dans `index.html` (canonical, og:url, og:image, JSON-LD), `robots.txt`, `sitemap.xml`
