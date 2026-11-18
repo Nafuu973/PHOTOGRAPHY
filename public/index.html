@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; connect-src https://gateway.umami.is; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
   <title>Nafuu · Photographe mariage &amp; shooting cinéma · Agen et partout en France</title>
@@ -63,7 +63,7 @@
 
   <main>
     <!-- Ouverture -->
-    <section class="wrap opening" id="haut" aria-labelledby="titre">
+    <section class="wrap opening" id="haut" aria-labelledby="titre" data-vu="ouverture">
       <figure>
         <img class="frame" src="assets/img/plans/ceremonie-2000.jpg" srcset="assets/img/plans/ceremonie-1000.jpg 1000w, assets/img/plans/ceremonie-2000.jpg 2000w" sizes="(min-width: 1280px) 1232px, calc(100vw - 32px)" width="2000" height="1000" fetchpriority="high" alt="Cérémonie de mariage polynésienne au crépuscule, au bord d'un lac. Au premier plan, l'officiant en coiffe de plumes parle au micro ; derrière lui, les mariés en tenues orange à motifs floraux. Le marié reste sérieux, la mariée rit, la main dans les cheveux.">
         <figcaption><span>[Elle rit. Lui, pas encore.]</span><span>SC. 00 · Mariage, septembre 2026</span></figcaption>
@@ -76,14 +76,14 @@
           <p class="pitch-lead">Mariages et shootings privés. Objectif anamorphique, étalonnage désaturé, une seule couleur gardée : la vôtre.</p>
         </div>
         <div class="pitch-cta">
-          <a class="btn" id="cta-principal" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20J%27aimerais%20un%20devis.%0APrestation%20%28mariage%2C%20shooting%E2%80%A6%29%20%3A%20%0ADate%20%3A%20%0ALieu%20%3A%20" target="_blank" rel="noopener noreferrer">Demander un devis sur WhatsApp</a>
+          <a class="btn" id="cta-principal" data-ev="ouverture" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20J%27aimerais%20un%20devis.%0APrestation%20%28mariage%2C%20shooting%E2%80%A6%29%20%3A%20%0ADate%20%3A%20%0ALieu%20%3A%20%0AComment%20m%27avez-vous%20trouv%C3%A9%20%3A%20" target="_blank" rel="noopener noreferrer">Demander un devis sur WhatsApp</a>
           <p>Gratuit, sans engagement. Ou <a href="tel:+33786887651">07 86 88 76 51</a></p>
         </div>
       </div>
     </section>
 
     <!-- Plans -->
-    <section class="wrap section" id="plans" aria-labelledby="titre-plans">
+    <section class="wrap section" id="plans" aria-labelledby="titre-plans" data-vu="plans">
       <div class="section-head">
         <h2 id="titre-plans">Rushes</h2>
         <a href="https://www.instagram.com/nafuu.raw/" target="_blank" rel="noopener noreferrer">Le reste de la bobine sur @nafuu.raw</a>
@@ -128,41 +128,41 @@
     </section>
 
     <!-- Prestations -->
-    <section class="wrap section" id="prestations" aria-labelledby="titre-prestations">
+    <section class="wrap section" id="prestations" aria-labelledby="titre-prestations" data-vu="prestations">
       <h2 id="titre-prestations">Prestations</h2>
       <ul class="offers">
-        <li class="offer">
+        <li class="offer" data-vu="offre">
           <h3>Mariage &amp; événement</h3>
           <div class="offer-body">
             <p>Des préparatifs à la soirée. Pas de poses imposées : je cherche les moments, la lumière fait le reste. Programme construit avec vous, galerie privée en ligne.</p>
             <p class="price">Cérémonie dès 590 € · Demi-journée dès 990 € · Journée dès 1 490 €</p>
             <p class="note">3 h · 6 h · 10 h — environ 150, 300 ou 450 photos étalonnées</p>
           </div>
-          <a class="btn-line" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Nous%20aimerions%20un%20devis%20pour%20notre%20mariage.%0ADate%20%3A%20%0ALieu%20%3A%20%0ANombre%20d%27invit%C3%A9s%20%28environ%29%20%3A%20" target="_blank" rel="noopener noreferrer">Devis mariage</a>
+          <a class="btn-line" data-ev="formule-mariage" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Nous%20aimerions%20un%20devis%20pour%20notre%20mariage.%0ADate%20%3A%20%0ALieu%20%3A%20%0ANombre%20d%27invit%C3%A9s%20%28environ%29%20%3A%20%0AComment%20m%27avez-vous%20trouv%C3%A9%20%3A%20" target="_blank" rel="noopener noreferrer">Devis mariage</a>
         </li>
-        <li class="offer">
+        <li class="offer" data-vu="offre">
           <h3>Shooting privé</h3>
           <div class="offer-body">
             <p>Portrait, couple, véhicule, animal. Une séance préparée comme une scène : lieu, heure, lumière. Un tirage A4 inclus.</p>
             <p class="price">1 h · dès 140 € — 2 h · dès 220 €</p>
             <p class="note">20 ou 35 photos étalonnées</p>
           </div>
-          <a class="btn-line" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20souhaite%20r%C3%A9server%20un%20shooting%20priv%C3%A9.%0AType%20de%20s%C3%A9ance%20%28portrait%2C%20couple%2C%20v%C3%A9hicule%2C%20animal%29%20%3A%20%0ADate%20souhait%C3%A9e%20%3A%20%0ALieu%20%3A%20" target="_blank" rel="noopener noreferrer">Réserver une séance</a>
+          <a class="btn-line" data-ev="formule-shooting" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20souhaite%20r%C3%A9server%20un%20shooting%20priv%C3%A9.%0AType%20de%20s%C3%A9ance%20%28portrait%2C%20couple%2C%20v%C3%A9hicule%2C%20animal%29%20%3A%20%0ADate%20souhait%C3%A9e%20%3A%20%0ALieu%20%3A%20%0AComment%20m%27avez-vous%20trouv%C3%A9%20%3A%20" target="_blank" rel="noopener noreferrer">Réserver une séance</a>
         </li>
-        <li class="offer">
+        <li class="offer" data-vu="offre">
           <h3>Carte cadeau</h3>
           <div class="offer-body">
             <p>Un shooting à offrir : anniversaire, Noël, couple. Valable 12 mois.</p>
             <p class="price">140 € ou 220 €</p>
           </div>
-          <a class="btn-line" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20souhaite%20offrir%20un%20shooting%20en%20carte%20cadeau.%0APour%20qui%20%2F%20quelle%20occasion%20%3A%20" target="_blank" rel="noopener noreferrer">Offrir</a>
+          <a class="btn-line" data-ev="formule-cadeau" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20souhaite%20offrir%20un%20shooting%20en%20carte%20cadeau.%0APour%20qui%20%2F%20quelle%20occasion%20%3A%20%0AComment%20m%27avez-vous%20trouv%C3%A9%20%3A%20" target="_blank" rel="noopener noreferrer">Offrir</a>
         </li>
       </ul>
       <p class="note-global">Tarifs indicatifs : le prix final dépend de votre projet et figure sur le devis. Je me déplace partout en France. Déplacement inclus à 30 km autour d'Agen ; au-delà, 0,40 €/km et hébergement si nécessaire, indiqués sur le devis. Acompte de 30 % à la réservation.</p>
     </section>
 
     <!-- Déroulé -->
-    <section class="wrap section" aria-labelledby="titre-deroule">
+    <section class="wrap section" aria-labelledby="titre-deroule" data-vu="deroule">
       <h2 id="titre-deroule">Comme un tournage</h2>
       <ol class="steps">
         <li><p class="kicker">ÉCRITURE</p><p>Vous m'écrivez votre idée, la date, le lieu.</p></li>
@@ -173,7 +173,7 @@
     </section>
 
     <!-- Albums des événements -->
-    <section class="wrap section" aria-labelledby="titre-albums">
+    <section class="wrap section" aria-labelledby="titre-albums" data-vu="albums">
       <div class="albums">
         <h2 id="titre-albums">Vous étiez à un événement que j'ai photographié ?</h2>
         <p>L'album complet est disponible contre une participation libre. <a href="https://pots.lydia.me/collect/pots?id=57192-moto" target="_blank" rel="noopener noreferrer">Participer et recevoir l'album</a></p>
@@ -182,24 +182,24 @@
   </main>
 
   <!-- Générique de fin -->
-  <footer class="wrap credits" id="contact">
+  <footer class="wrap credits" id="contact" data-vu="contact">
     <p class="brand">NAFUU</p>
     <dl>
       <dt>IMAGE</dt><dd>Nafuu</dd>
       <dt>LIEU</dt><dd>Basé près d'Agen · partout en France</dd>
-      <dt>WHATSAPP</dt><dd><a href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20vous%20contacte%20depuis%20votre%20page." target="_blank" rel="noopener noreferrer">Écrire</a></dd>
+      <dt>WHATSAPP</dt><dd><a data-ev="generique" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20Je%20vous%20contacte%20depuis%20votre%20page.%0AComment%20m%27avez-vous%20trouv%C3%A9%20%3A%20" target="_blank" rel="noopener noreferrer">Écrire</a></dd>
       <dt>TÉLÉPHONE</dt><dd><a href="tel:+33786887651">07 86 88 76 51</a></dd>
       <dt>E-MAIL</dt><dd><a href="mailto:nafuu.raw@gmail.com?subject=Demande%20de%20devis">nafuu.raw@gmail.com</a></dd>
       <dt>INSTAGRAM</dt><dd><a href="https://www.instagram.com/nafuu.raw/" target="_blank" rel="noopener noreferrer">@nafuu.raw</a></dd>
     </dl>
-    <p class="fine">© Nafuu · nafuu.raw — Aucun cookie, aucun traceur.</p>
+    <p class="fine">© Nafuu · nafuu.raw — Aucun cookie. Mesure d'audience anonyme (Umami), sans traceur publicitaire.</p>
   </footer>
 
   <!-- Bouton de réservation fixe (téléphone) -->
   <div class="cta-bar" aria-hidden="true">
-    <a class="btn" tabindex="-1" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20J%27aimerais%20un%20devis.%0APrestation%20%28mariage%2C%20shooting%E2%80%A6%29%20%3A%20%0ADate%20%3A%20%0ALieu%20%3A%20" target="_blank" rel="noopener noreferrer">Demander un devis sur WhatsApp</a>
+    <a class="btn" tabindex="-1" data-ev="barre-mobile" href="https://wa.me/33786887651?text=Bonjour%20Nafuu%20%21%20J%27aimerais%20un%20devis.%0APrestation%20%28mariage%2C%20shooting%E2%80%A6%29%20%3A%20%0ADate%20%3A%20%0ALieu%20%3A%20%0AComment%20m%27avez-vous%20trouv%C3%A9%20%3A%20" target="_blank" rel="noopener noreferrer">Demander un devis sur WhatsApp</a>
   </div>
 
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js" data-umami="" defer></script>
 </body>
 </html>
