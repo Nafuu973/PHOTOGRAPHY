@@ -85,6 +85,9 @@ for page in sorted(PUBLIC.rglob("*.html")):
     texte = lire(page)
     if "Content-Security-Policy" not in texte:
         err(f"{page.relative_to(PUBLIC)}: balise meta CSP absente")
+    for hote in re.findall(r"https://[^\s;'\"]+", (re.search(r'Content-Security-Policy" content="([^"]*)"', texte) or [None, ""])[1]):
+        if hote != "https://gateway.umami.is":
+            err(f"{page.relative_to(PUBLIC)}: hôte non prévu dans la CSP : {hote}")
     if "frame-ancestors" in texte:
         err(f"{page.relative_to(PUBLIC)}: frame-ancestors est ignoré dans une balise meta")
     Page(page).feed(texte)

@@ -4,7 +4,8 @@ Page « linktree » de **Nafuu**, photographe à Agen.
 *L'esthétique du cinéma appliquée à la photo.*
 
 Site 100 % statique hébergé sur GitHub Pages : HTML, CSS, un script d'une vingtaine de lignes.
-Aucune dépendance, aucun traceur, aucune ressource externe, aucun cookie.
+Aucune dépendance, aucun cookie, aucune ressource externe chargée.
+Seule exception : la mesure d'audience anonyme envoie des événements à Umami Cloud (`gateway.umami.is`), seul hôte autorisé par la CSP.
 
 ## Organisation
 
@@ -15,7 +16,7 @@ public/                 SEUL dossier publié sur Internet
   robots.txt, sitemap.xml
   assets/
     css/                fonts.css, style.css
-    js/main.js          Barre « Demander un devis » fixe sur téléphone
+    js/main.js          Barre « Demander un devis » fixe sur téléphone + mesure d'audience
     fonts/              Jost et IBM Plex Mono auto-hébergées + licences (SIL OFL)
     img/                Favicon, image de partage
     img/plans/          Photos 2:1, en 1000 et 2000 px de large, sans métadonnées
@@ -86,6 +87,15 @@ Ces réglages ne sont pas dans le code : les faire dans l'interface GitHub.
 7. **Nom de domaine** (quand il sera acheté) : vérifier le domaine au niveau du **profil** (Settings du compte → Pages → Add a domain)
    avec l'enregistrement TXT demandé, et le **laisser en place**. Jamais d'enregistrement DNS générique `*.domaine`.
    Sans cela, un tiers peut reprendre le domaine si le site est supprimé ou désactivé.
+
+## Mesure d'audience (Umami Cloud, offre gratuite)
+
+- Sans cookie ni stockage local, aucun script tiers : `main.js` envoie lui-même les événements à `https://gateway.umami.is/api/send`.
+- Activation : coller l'identifiant du site (Website ID) dans `data-umami=""` de la balise `<script>` de `index.html` et `carte.html`. Vide = rien n'est envoyé.
+- Rien n'est envoyé hors de `nafuu973.github.io`, ni si le navigateur demande Do Not Track / Global Privacy Control.
+- Événements : page vue, `vu-section`, `vu-formule`, `lecture` (25/50/75/100 %), `devis-whatsapp`, `appel`, `email`, `instagram`, `album-lydia`, `ajout-contact` (avec `position` = attribut `data-ev` du lien).
+- Changer de domaine : mettre à jour la condition `location.hostname` dans `main.js`.
+- Le contrôle refuse tout autre hôte dans la CSP.
 
 ## Carte de contact (NFC et QR code)
 
