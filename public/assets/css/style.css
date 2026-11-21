@@ -80,7 +80,8 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 0.8125rem; c
 .opening figcaption { margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--muted); }
 .pitch { margin-top: 72px; display: flex; flex-wrap: wrap; gap: 40px 64px; align-items: flex-end; justify-content: space-between; }
 .pitch-text { flex: 1 1 560px; min-width: 0; }
-.pitch h1 { margin-top: 18px; font-weight: 300; font-size: clamp(2.375rem, 1.5rem + 3.3vw, 4.75rem); line-height: 1.05; letter-spacing: -.01em; }
+.pitch h1 .kicker { display: block; margin-bottom: 18px; font-weight: 400; line-height: 1.55; letter-spacing: .08em; text-wrap: wrap; }
+.pitch h1 { font-weight: 300; font-size: clamp(2.375rem, 1.5rem + 3.3vw, 4.75rem); line-height: 1.05; letter-spacing: -.01em; }
 .pitch-lead { margin-top: 24px; max-width: 46ch; color: var(--text-soft); }
 .pitch-cta { flex: 0 1 360px; display: flex; flex-direction: column; gap: 14px; }
 .pitch-cta p { font-size: 0.9375rem; color: var(--muted); text-align: center; }
@@ -131,6 +132,13 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 0.8125rem; c
 /* 7. Déroulé -------------------------------------------------------------- */
 .steps { margin-top: 40px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 40px 32px; }
 .steps p { margin-top: 10px; color: var(--text-soft); }
+
+/* Questions fréquentes */
+.faq { margin-top: 32px; max-width: 72ch; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { padding: 18px 0; cursor: pointer; font-size: 1.125rem; }
+.faq summary:hover { color: var(--amber); }
+.faq details p { padding-bottom: 20px; color: var(--text-soft); }
 
 /* 8. Albums --------------------------------------------------------------- */
 .albums { display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: baseline; border-top: 1px solid var(--line); padding-top: 20px; }
