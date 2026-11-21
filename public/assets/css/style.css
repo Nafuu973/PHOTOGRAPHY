@@ -30,10 +30,11 @@
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: dark; }
 body {
   min-height: 100vh;
+  min-height: 100svh;          /* hauteur visible, barre d'adresse mobile comprise */
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
@@ -41,6 +42,8 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: var(--text); }
 a:hover { color: var(--amber); }
 :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+h1, h2, h3 { text-wrap: balance; overflow-wrap: break-word; }  /* titres : lignes équilibrées, coupés si texte très agrandi */
+p { text-wrap: pretty; }                    /* paragraphes : pas de mot seul en dernière ligne */
 
 .skip-link {
   position: absolute; left: var(--gutter); top: -100px; z-index: 10;
@@ -49,26 +52,26 @@ a:hover { color: var(--amber); }
 .skip-link:focus { top: var(--gutter); }
 
 .wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
-.mono { font-family: var(--mono); font-size: 13px; }
-.kicker { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; color: var(--amber); }
+.mono { font-family: var(--mono); font-size: 0.8125rem; }
+.kicker { font-family: var(--mono); font-size: 0.8125rem; letter-spacing: .08em; color: var(--amber); }
 .section { padding-top: 140px; }
 .section-head {
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px 24px;
   border-top: 1px solid var(--line); padding-top: 20px;
 }
-.section-head h2, .section > h2 { font-weight: 400; font-size: 30px; line-height: 1.2; }
+.section-head h2, .section > h2 { font-weight: 400; font-size: 1.875rem; line-height: 1.2; }
 .section > h2 { border-top: 1px solid var(--line); padding-top: 20px; }
-.section-head a { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.section-head a { font-family: var(--mono); font-size: 0.8125rem; color: var(--muted); }
 
 /* Cadre photo 2:1 (format des exports anamorphiques désqueezés) */
 .frame { aspect-ratio: 2 / 1; width: 100%; object-fit: cover; background: var(--frame); }
 figure { margin: 0; }
-figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color: var(--text-soft); }
+figcaption { margin-top: 12px; font-family: var(--mono); font-size: 0.8125rem; color: var(--text-soft); }
 
 /* 3. En-tête -------------------------------------------------------------- */
 .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 28px; padding-bottom: 28px; }
-.brand { font-size: 20px; font-weight: 500; letter-spacing: .42em; text-decoration: none; }
-.nav { display: flex; flex-wrap: wrap; gap: 28px; padding: 0; list-style: none; font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.brand { font-size: 1.25rem; font-weight: 500; letter-spacing: .42em; text-decoration: none; }
+.nav { display: flex; flex-wrap: wrap; gap: 28px; padding: 0; list-style: none; font-family: var(--mono); font-size: 0.8125rem; letter-spacing: .08em; text-transform: uppercase; }
 .nav a { color: var(--muted); text-decoration: none; }
 .nav a:hover { color: var(--amber); }
 
@@ -77,10 +80,10 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color:
 .opening figcaption { margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--muted); }
 .pitch { margin-top: 72px; display: flex; flex-wrap: wrap; gap: 40px 64px; align-items: flex-end; justify-content: space-between; }
 .pitch-text { flex: 1 1 560px; min-width: 0; }
-.pitch h1 { margin-top: 18px; font-weight: 300; font-size: clamp(38px, 5.2vw, 76px); line-height: 1.05; letter-spacing: -.01em; }
+.pitch h1 { margin-top: 18px; font-weight: 300; font-size: clamp(2.375rem, 1.5rem + 3.3vw, 4.75rem); line-height: 1.05; letter-spacing: -.01em; }
 .pitch-lead { margin-top: 24px; max-width: 46ch; color: var(--text-soft); }
 .pitch-cta { flex: 0 1 360px; display: flex; flex-direction: column; gap: 14px; }
-.pitch-cta p { font-size: 15px; color: var(--muted); text-align: center; }
+.pitch-cta p { font-size: 0.9375rem; color: var(--muted); text-align: center; }
 
 .btn {
   display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px;
@@ -89,7 +92,7 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color:
 }
 .btn:hover { background: #f0a462; color: var(--on-amber); }
 .btn-line {
-  flex: 0 0 auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px;
+  flex: 0 1 auto; align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; max-width: 100%; padding: 8px 22px; text-align: center;
   border: 1px solid var(--amber); color: var(--amber); text-decoration: none; border-radius: 2px;
   transition: background-color .15s ease, color .15s ease;
 }
@@ -112,18 +115,18 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color:
 .strip::after { right: var(--hole-x); }
 .edge {                                   /* marquages de bord */
   margin-bottom: 8px; display: flex; justify-content: space-between;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--amber);
+  font-family: var(--mono); font-size: 0.6875rem; letter-spacing: .14em; color: var(--amber);
 }
 
 /* 6. Prestations ---------------------------------------------------------- */
 .offers { margin-top: 32px; padding: 0; list-style: none; }
 .offer { display: flex; flex-wrap: wrap; gap: 16px 48px; padding: 36px 0; border-bottom: 1px solid var(--line); }
-.offer h3 { flex: 1 1 280px; font-weight: 400; font-size: 34px; line-height: 1.15; }
+.offer h3 { flex: 1 1 280px; font-weight: 400; font-size: 2.125rem; line-height: 1.15; }
 .offer-body { flex: 2 1 420px; min-width: 0; }
 .offer-body p { color: var(--text-soft); }
-.offer-body .price { margin-top: 16px; font-family: var(--mono); font-size: 14px; color: var(--text); }
-.offer-body .note { margin-top: 6px; font-family: var(--mono); font-size: 13px; color: var(--dim); }
-.note-global { margin-top: 24px; max-width: 72ch; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.offer-body .price { margin-top: 16px; font-family: var(--mono); font-size: 0.875rem; color: var(--text); }
+.offer-body .note { margin-top: 6px; font-family: var(--mono); font-size: 0.8125rem; color: var(--dim); }
+.note-global { margin-top: 24px; max-width: 72ch; font-family: var(--mono); font-size: 0.8125rem; color: var(--muted); }
 
 /* 7. Déroulé -------------------------------------------------------------- */
 .steps { margin-top: 40px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 40px 32px; }
@@ -131,16 +134,16 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color:
 
 /* 8. Albums --------------------------------------------------------------- */
 .albums { display: flex; flex-wrap: wrap; gap: 16px 48px; align-items: baseline; border-top: 1px solid var(--line); padding-top: 20px; }
-.albums h2 { flex: 1 1 280px; font-weight: 400; font-size: 24px; line-height: 1.25; }
+.albums h2 { flex: 1 1 280px; font-weight: 400; font-size: 1.5rem; line-height: 1.25; }
 .albums p { flex: 2 1 420px; color: var(--text-soft); }
 
 /* 9. Générique ------------------------------------------------------------ */
 .credits { padding-top: 160px; padding-bottom: calc(64px + var(--cta-bar) + env(safe-area-inset-bottom)); text-align: center; }
 .credits .brand { display: inline-block; }
-.credits dl { margin: 40px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; max-width: 520px; font-family: var(--mono); font-size: 13px; }
+.credits dl { margin: 40px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; max-width: 520px; font-family: var(--mono); font-size: 0.8125rem; }
 .credits dt { text-align: right; color: var(--dim); }
 .credits dd { margin: 0; text-align: left; overflow-wrap: anywhere; }
-.credits .fine { margin-top: 56px; font-family: var(--mono); font-size: 12px; color: var(--dim); }
+.credits .fine { margin-top: 56px; font-family: var(--mono); font-size: 0.75rem; color: var(--dim); }
 
 /* 10. Barre de réservation mobile ----------------------------------------- */
 .cta-bar {
@@ -152,30 +155,35 @@ figcaption { margin-top: 12px; font-family: var(--mono); font-size: 13px; color:
 }
 .cta-bar.is-visible { transform: none; visibility: visible; }
 .cta-bar .btn { max-width: 480px; margin: 0 auto; }
-@media (min-width: 760px) {
+@media (min-width: 47.5em) {
   .cta-bar { display: none; }
   .credits { padding-bottom: 64px; }
 }
 
 /* Carte de contact (carte.html, ouverte par la puce NFC ou le QR code) */
-.card { min-height: 100vh; max-width: 520px; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding-top: 48px; padding-bottom: 48px; }
-.card h1 { font-weight: 300; font-size: 34px; line-height: 1.1; }
-.card-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0; list-style: none; }
+.card { min-height: 100vh; min-height: 100svh; max-width: 520px; display: flex; flex-direction: column; justify-content: center; gap: 22px; padding-top: 48px; padding-bottom: 48px; }
+.card h1 { font-weight: 300; font-size: 2.125rem; line-height: 1.1; }
+.card-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: 12px; padding: 0; list-style: none; }
 .card-links .btn-line { width: 100%; justify-content: center; }
-.card .fine { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.card .fine { font-family: var(--mono); font-size: 0.8125rem; color: var(--muted); }
 
 /* Page 404 */
-.lost { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
-.lost h1 { font-weight: 300; font-size: clamp(56px, 10vw, 120px); line-height: 1; }
+.lost { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+.lost h1 { font-weight: 300; font-size: clamp(3.5rem, 2rem + 7vw, 7.5rem); line-height: 1; }
 .lost p { color: var(--text-soft); }
 .lost .btn { align-self: flex-start; }
 
 /* Petits écrans */
-@media (max-width: 420px) {
+@media (max-width: 26.25em) {
   :root { --gutter: 16px; }
   .section { padding-top: 96px; }
   .pitch { margin-top: 48px; }
-  .offer h3 { font-size: 28px; }
+  .offer h3 { font-size: 1.75rem; }
+}
+
+/* Fondu entre la carte de contact et le site (navigateurs compatibles) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
 }
 
 /* Accessibilité : animations réduites */
